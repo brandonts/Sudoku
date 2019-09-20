@@ -24,6 +24,7 @@ class SudokuPuzzle
 		int Check_();
 		void Display_();
 		void Write_(int row, int column, int value);
+		int Read_(int row, int column);
 		int SearchBox_(int box_number,int search_value);
 		int SearchVerticalLine_(int line_number,int search_value);
 		int SearchHorizontalLine_(int line_number,int search_value);
@@ -59,6 +60,11 @@ void SudokuPuzzle::Write_(int row, int column, int value)
 	int square=(row*9+column);
 	if(square>80) throw invalid_argument("SudokuPuzzle::Write_: out of bounds 0-80 required");
 	table[square]=value;
+}
+
+int SudokuPuzzle::Read_(int row, int column)
+{
+	return table[row*9+column];
 }
 
 int SudokuPuzzle::Check_()

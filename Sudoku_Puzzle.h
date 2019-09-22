@@ -31,6 +31,7 @@ class SudokuPuzzle
 		int FindVerticalLine_(int square);
 		int FindHorizontalLine_(int square);
 		int FindBox_(int square);
+		bool TestSquare_(int row, int column, int search_value);// need to check if it works
 };
 
 SudokuPuzzle::SudokuPuzzle(vector<int> v)
@@ -50,9 +51,17 @@ void SudokuPuzzle::Display_()
 	cout << "\n";
 	for(int i=0;i<9;i++)
 	{
-		for(int j=0;j<9;j++) cout << table[i*9+j] << " ";
-		cout << "\n";
+		if(i==0 || i==3 || i==6) cout<<"\n-------------------\n";
+		else cout<<"\n";
+		cout << "|";
+		for(int j=0;j<9;j++)
+		{
+			cout << table[i*9+j];
+			if(j==2 || j==5 || j==8) cout<<"|";
+			else cout<<" ";
+		}
 	}
+	 cout<<"\n-------------------\n";
 }
 
 void SudokuPuzzle::Write_(int row, int column, int value)
@@ -252,4 +261,13 @@ int SudokuPuzzle::FindBox_(int square)
 	}
 	return -1;
 }
+
+bool SudokuPuzzle::TestSquare_(int row, int column, int value)
+{
+	int square=row*9+column;
+	return (!(this->SearchBox_(this->FindBox_(square),value) &&
+			!this->SearchVerticalLine_(this->FindVerticalLine_(square),value) &&
+			!this->SearchHorizontalLine_(this->FindHorizontalLine_(square),value)));
+}
+
 #endif /* SUDOKU_PUZZLE_H_ */

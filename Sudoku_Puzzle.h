@@ -31,7 +31,7 @@ class SudokuPuzzle
 		int FindVerticalLine_(int square);
 		int FindHorizontalLine_(int square);
 		int FindBox_(int square);
-		bool TestSquare_(int row, int column, int search_value);// need to check if it works
+		bool TestSquare_(int row, int column, int search_value);//returns true when square could hold value
 };
 
 SudokuPuzzle::SudokuPuzzle(vector<int> v)
@@ -127,7 +127,7 @@ int SudokuPuzzle::SearchVerticalLine_(int line_number,int search_value)
 {
 	if(line_number<0 || line_number>8) throw invalid_argument("SudokuPuzzle::SearchVerticalLine: out of bounds 0-8 required");
 	int count=0;
-	for(int i=line_number; i<8; i=+9) if(table[i]==search_value) count++;
+	for(int i=line_number; i<80; i+=9)	if(table[i]==search_value) count++;
 
 	return count;
 }
@@ -265,9 +265,13 @@ int SudokuPuzzle::FindBox_(int square)
 bool SudokuPuzzle::TestSquare_(int row, int column, int value)
 {
 	int square=row*9+column;
-	return (!(this->SearchBox_(this->FindBox_(square),value) &&
-			!this->SearchVerticalLine_(this->FindVerticalLine_(square),value) &&
-			!this->SearchHorizontalLine_(this->FindHorizontalLine_(square),value)));
+	//cout << "\n\nvalue:" << value;
+	//cout << "\nSearchBox_:" << this->SearchBox_(this->FindBox_(square),value);
+	//cout << "\nSearchVerticalLine_:" << this->SearchVerticalLine_(row,value);
+	//cout << "\nSearchHorizontalLine_:" << this->SearchHorizontalLine_(column,value)<<"\n";
+	return (!(this->SearchBox_(this->FindBox_(square),value) ||
+			this->SearchVerticalLine_(row,value) ||
+			this->SearchHorizontalLine_(column,value)));
 }
 
 #endif /* SUDOKU_PUZZLE_H_ */

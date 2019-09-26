@@ -35,6 +35,7 @@ int main()
 	p1.Display_();
 	p1=SudokuSolver(p1);
 	p1.Display_();
+	cout<<"DONE!";
 
 }
 
@@ -71,8 +72,8 @@ int Solver(SudokuPuzzle& x)
 						{
 							if(value==10) return -1;
 							SudokuPuzzle guess=temp;
-							//cout << temp.TestSquare_(i,j,value);
-							//if(!temp.TestSquare_(i,j,value))
+							//cout<<guess.TestSquare_(i,j,value);
+							//if(guess.TestSquare_(i,j,value))
 							{
 								guess.Write_(i,j,value);
 								//guess.Display_();

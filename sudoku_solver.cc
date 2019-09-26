@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <chrono>
 
 #include "Sudoku_Puzzle.h"
 
@@ -33,10 +34,12 @@ int main()
 	SudokuPuzzle p1{test};
 
 	p1.Display_();
+	auto time1=chrono::steady_clock::now();
 	p1=SudokuSolver(p1);
+	auto d=chrono::steady_clock::now()-time1;
 	p1.Display_();
 	cout<<"DONE!";
-
+	cout << "solving that puzzle took: "<< chrono::duration_cast<chrono::milliseconds>(d).count() << "ms;";
 }
 
 bool OnlyPossible(SudokuPuzzle& x)

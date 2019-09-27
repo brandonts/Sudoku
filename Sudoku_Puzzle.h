@@ -264,8 +264,9 @@ int SudokuPuzzle::FindBox_(int square)
 
 bool SudokuPuzzle::TestSquare_(int row, int column, int value)
 {
+	if(0>row || row>8 || 0>column || column>8) throw invalid_argument("SudokuPuzzle::TestSquare_: out of bounds 0-8 required");
 	int square=row*9+column;
-	/*
+	/* This block is useful for testing displays info about square being tested
 	cout << "\n\ni:"<<row;
 	cout << "\nj:"<<column;
 	cout << "\nvalue:" << value;

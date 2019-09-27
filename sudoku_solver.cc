@@ -38,7 +38,7 @@ int main()
 	p1=SudokuSolver(p1);
 	auto d=chrono::steady_clock::now()-time1;
 	p1.Display_();
-	cout<<"DONE!";
+	cout<<"DONE!\n";
 	cout << "solving that puzzle took: "<< chrono::duration_cast<chrono::milliseconds>(d).count() << "ms;";
 }
 
@@ -75,8 +75,7 @@ int Solver(SudokuPuzzle& x)
 						{
 							if(value==10) return -1;
 							SudokuPuzzle guess=temp;
-							//cout<<guess.TestSquare_(i,j,value);
-							//if(guess.TestSquare_(i,j,value))
+							//if(guess.TestSquare_(i,j,value)) //this test actually makes program slower(48ms vs3 8ms)
 							{
 								guess.Write_(i,j,value);
 								//guess.Display_();

@@ -265,13 +265,18 @@ int SudokuPuzzle::FindBox_(int square)
 bool SudokuPuzzle::TestSquare_(int row, int column, int value)
 {
 	int square=row*9+column;
-	//cout << "\n\nvalue:" << value;
-	//cout << "\nSearchBox_:" << this->SearchBox_(this->FindBox_(square),value);
-	//cout << "\nSearchVerticalLine_:" << this->SearchVerticalLine_(row,value);
-	//cout << "\nSearchHorizontalLine_:" << this->SearchHorizontalLine_(column,value)<<"\n";
+	/*
+	cout << "\n\ni:"<<row;
+	cout << "\nj:"<<column;
+	cout << "\nvalue:" << value;
+	cout << "\nSearchBox_:" << this->SearchBox_(this->FindBox_(square),value);
+	cout << "\nSearchVerticalLine_:" << this->SearchVerticalLine_(column,value);
+	cout << "\nSearchHorizontalLine_:" << this->SearchHorizontalLine_(row,value)<<"\n";
+	cout << !(this->SearchBox_(this->FindBox_(square),value) ||	this->SearchVerticalLine_(row,value) ||	this->SearchHorizontalLine_(column,value));
+	 */
 	return (!(this->SearchBox_(this->FindBox_(square),value) ||
-			this->SearchVerticalLine_(row,value) ||
-			this->SearchHorizontalLine_(column,value)));
+			this->SearchVerticalLine_(column,value) ||
+			this->SearchHorizontalLine_(row,value)));
 }
 
 #endif /* SUDOKU_PUZZLE_H_ */

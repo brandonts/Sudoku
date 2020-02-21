@@ -44,6 +44,16 @@ SudokuPuzzle::SudokuPuzzle(vector<int> v)
 SudokuPuzzle::SudokuPuzzle()
 {
 	for(int i=0; i<81; i++) table.push_back(0);
+	if(table.size()!=81) throw invalid_argument("SudokuPuzzle::SudokuPuzzle: vector not size 81");
+/*	table={0,0,0,0,0,0,0,0,0,
+	       0,0,0,0,0,0,0,0,0,
+	       0,0,0,0,0,0,0,0,0,
+	       0,0,0,0,0,0,0,0,0,
+	       0,0,0,0,0,0,0,0,0,
+	       0,0,0,0,0,0,0,0,0,
+	       0,0,0,0,0,0,0,0,0,
+	       0,0,0,0,0,0,0,0,0,
+	       0,0,0,0,0,0,0,0,0};*/
 }
 
 void SudokuPuzzle::Display_()

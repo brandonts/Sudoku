@@ -15,7 +15,7 @@ bool OnlyPossible(SudokuPuzzle& x)
 	bool change=false;
 	for(int i; i<9; i++)
 	{
-		//if(OnlyPossibleBox(x,i))				change=true;
+		//if(OnlyPossibleBox(x,i))				    change=true;
 		//if(OnlyPossibleVerticalLine(x,i))		change=true;
 		//if(OnlyPossibleHorizontalLine(x,i))	change=true;
 

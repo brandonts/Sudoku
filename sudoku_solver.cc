@@ -15,10 +15,19 @@
 
 using namespace std;
 
-//SudokuPuzzle SudokuSolver(SudokuPuzzle x);
-
-int main()
+void TestEmptyPuzzle()
 {
+	cout<<"Begin empty puzzle test\n";
+	SudokuPuzzle p1{};
+	p1.Display_();
+	p1=SudokuSolver(p1);
+	p1.Display_();
+	cout<<"Empty puzzle test complete.\n";
+}
+
+void TestSpecificPuzzle()
+{
+	cout<<"Begin specific puzzle test.\n";
 	vector<int> test
 	{
 		0,3,5,7,0,9,4,0,0,
@@ -39,6 +48,12 @@ int main()
 	p1=SudokuSolver(p1);
 	auto d=chrono::steady_clock::now()-time1;
 	p1.Display_();
-	cout<<"DONE!\n";
-	cout << "solving that puzzle took: "<< chrono::duration_cast<chrono::milliseconds>(d).count() << "ms;";
+	cout<<"Specific Puzzle test complete.\n";
+}
+
+int main()
+{
+	TestEmptyPuzzle();
+	TestSpecificPuzzle();
+	return 0;
 }

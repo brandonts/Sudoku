@@ -1,8 +1,8 @@
 /*
- * sudoku_solver.h
+ *  sudoku_solver.h
  *
  *  Created on: Sep 27, 2019
- *      Author: Brandon Shaw
+ *  Author: Brandon Shaw
  */
 
 #ifndef SUDOKU_SOLVER_H_

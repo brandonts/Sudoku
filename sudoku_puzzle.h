@@ -58,7 +58,6 @@ SudokuPuzzle::SudokuPuzzle()
 
 void SudokuPuzzle::Display_()
 {
-	cout << "\n";
 	for(int i=0;i<9;i++)
 	{
 		if(i==0 || i==3 || i==6) cout<<"\n-------------------\n";

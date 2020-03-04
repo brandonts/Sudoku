@@ -11,7 +11,7 @@ Currently there is:
 To do List:  
   add more comprehensive unit testing
   improve user interface: add input validation, show where user is in input, allow corrections
-  complete sudoku_solver.h so it is not always using brute force to solved
+  complete sudoku_solver.h so it is not always using brute force to solve
 
 Future possibilities:
   (1) gui for entering a puzzle to be solved

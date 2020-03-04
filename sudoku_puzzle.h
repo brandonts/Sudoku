@@ -19,41 +19,43 @@ class SudokuPuzzle
 		vector<int> table;
 
 	public:
-		SudokuPuzzle(vector<int> v);
 		SudokuPuzzle();
-		int Check_();
+		SudokuPuzzle(vector<int> v);
+		bool operator==(const SudokuPuzzle &other);
+		bool operator==(const vector<int> &other);
 		void Display_();
-		void Write_(int row, int column, int value);
-		int Read_(int row, int column);
-		int SearchBox_(int box_number,int search_value);
-		int SearchVerticalLine_(int line_number,int search_value);
-		int SearchHorizontalLine_(int line_number,int search_value);
-		int FindVerticalLine_(int square);
-		int FindHorizontalLine_(int square);
-		int FindBox_(int square);
-		bool TestSquare_(int row, int column, int search_value);//returns true when square could hold value
-};
+		void Write_(int row, int column, int value);//writes value to a square
+		int Read_(int row, int column);//reads value from a square
+		int Check_();//returns -1 if puzzle has become inconsistent, returns the number of empty square otherwise
+		int SearchBox_(int box_number,int search_value);//returns how many times a search_value is found in a box
+		int SearchVerticalLine_(int line_number,int search_value);//returns how many times a search_value is found in a column
+		int SearchHorizontalLine_(int line_number,int search_value);//returns how many times a search_value is found in a row
+		bool TestSquare_(int row, int column, int search_value);//returns true when square could hold search_value withought makeing the puzzle inconsistent
+		int FindBox_(int row,int column);//returns index of box that a square(0-80))is in
 
-SudokuPuzzle::SudokuPuzzle(vector<int> v)
-{
-	if(v.size()!=81) throw invalid_argument("SudokuPuzzle::SudokuPuzzle: vector not size 81");
-	table=v;
-	if(Check_()==-1) throw invalid_argument("SudokuPuzzle::SudokuPuzzle: invalid configuration");
-}
+};
 
 SudokuPuzzle::SudokuPuzzle()
 {
 	for(int i=0; i<81; i++) table.push_back(0);
 	if(table.size()!=81) throw invalid_argument("SudokuPuzzle::SudokuPuzzle: vector not size 81");
-/*	table={0,0,0,0,0,0,0,0,0,
-	       0,0,0,0,0,0,0,0,0,
-	       0,0,0,0,0,0,0,0,0,
-	       0,0,0,0,0,0,0,0,0,
-	       0,0,0,0,0,0,0,0,0,
-	       0,0,0,0,0,0,0,0,0,
-	       0,0,0,0,0,0,0,0,0,
-	       0,0,0,0,0,0,0,0,0,
-	       0,0,0,0,0,0,0,0,0};*/
+}
+
+SudokuPuzzle::SudokuPuzzle(vector<int> v)
+{
+	if(v.size()!=81) throw invalid_argument("SudokuPuzzle::SudokuPuzzle: vector not size 81");
+	table=v;
+	if(Check_()==-1) throw invalid_argument("SudokuPuzzle::SudokuPuzzle: failed Check_()");
+}
+
+bool SudokuPuzzle::operator==(const SudokuPuzzle &other)
+{
+	return(this->table==other.table);
+}
+
+bool SudokuPuzzle::operator==(const vector<int> &other)
+{
+	return(this->table==other);
 }
 
 void SudokuPuzzle::Display_()
@@ -75,6 +77,9 @@ void SudokuPuzzle::Display_()
 
 void SudokuPuzzle::Write_(int row, int column, int value)
 {
+	if(value<0 || value>9) throw invalid_argument("SudokuPuzzle::Write_: value 0-9 allowed only");
+	if(row<0 || row>8) throw invalid_argument("SudokuPuzzle::Write_: 0-8 allowed for row");
+	if(column<0 || column>8) throw invalid_argument("SudokuPuzzle::Write_: 0-8 allowed for column");
 	int square=(row*9+column);
 	if(square>80) throw invalid_argument("SudokuPuzzle::Write_: out of bounds 0-80 required");
 	table[square]=value;
@@ -82,12 +87,14 @@ void SudokuPuzzle::Write_(int row, int column, int value)
 
 int SudokuPuzzle::Read_(int row, int column)
 {
+	if(row<0 || row>8) throw invalid_argument("SudokuPuzzle::Read_: 0-8 allowed for row");
+	if(column<0 || column>8) throw invalid_argument("SudokuPuzzle::Read_: 0-8 allowed for column");
 	return table[row*9+column];
 }
 
-int SudokuPuzzle::Check_()
+int SudokuPuzzle::Check_()//returns -1 if puzzle has become inconsistent, returns the number of empty square otherwise
 {
-	for(int i=0; i<9; i++)
+	for(int i=0; i<9; i++)//returns -1 if any values are found twice in any box,row, or column
 	{
 		for(int j=1; j<10; j++)
 		{
@@ -102,7 +109,7 @@ int SudokuPuzzle::Check_()
 }
 
 int SudokuPuzzle::SearchBox_(int box_number,int search_value)
-{
+{//returns how many times a search_value is found in a box
 	int count=0;
 	int b=0;
 	switch(box_number)
@@ -163,25 +170,10 @@ int SudokuPuzzle::SearchHorizontalLine_(int line_number,int search_value)
 	return count;
 }
 
-int SudokuPuzzle::FindVerticalLine_(int square)
+int SudokuPuzzle::FindBox_(int row, int column)
 {
-	if(square<0 || square>80) throw invalid_argument("SudokuPuzzle::FindVerticalLine_: out of bounds 0-80 required");
-	while(square>8) square-=9;
-
-	return square;
-}
-
-int SudokuPuzzle::FindHorizontalLine_(int square)
-{
-	if(square<0 || square>80) throw invalid_argument("SudokuPuzzle::FindHorizontalLine_: out of bounds 0-80 requried");
-	int count=0;
-	while(square>8) count++;
-
-	return count;
-}
-
-int SudokuPuzzle::FindBox_(int square)
-{
+	if(0>row || row>8 || 0>column || column>8) throw invalid_argument("SudokuPuzzle::TestSquare_: out of bounds 0-8 required");
+	int square=row*9+column;
 	if(square<0 || square>80) throw invalid_argument("SudokuPuzzle::FindBox_: out of bounds 0-80 required");
 	switch(square)
 	{
@@ -271,22 +263,11 @@ int SudokuPuzzle::FindBox_(int square)
 	return -1;
 }
 
-bool SudokuPuzzle::TestSquare_(int row, int column, int value)
+bool SudokuPuzzle::TestSquare_(int row, int column, int value)//returns true when square could hold search_value withought makeing the puzzle inconsistent
 {
-	if(0>row || row>8 || 0>column || column>8) throw invalid_argument("SudokuPuzzle::TestSquare_: out of bounds 0-8 required");
-	int square=row*9+column;
-	/* This block is useful for testing displays info about square being tested
-	cout << "\n\ni:"<<row;
-	cout << "\nj:"<<column;
-	cout << "\nvalue:" << value;
-	cout << "\nSearchBox_:" << this->SearchBox_(this->FindBox_(square),value);
-	cout << "\nSearchVerticalLine_:" << this->SearchVerticalLine_(column,value);
-	cout << "\nSearchHorizontalLine_:" << this->SearchHorizontalLine_(row,value)<<"\n";
-	cout << !(this->SearchBox_(this->FindBox_(square),value) ||	this->SearchVerticalLine_(row,value) ||	this->SearchHorizontalLine_(column,value));
-	 */
-	return (!(this->SearchBox_(this->FindBox_(square),value) ||
-			this->SearchVerticalLine_(column,value) ||
-			this->SearchHorizontalLine_(row,value)));
+	return (!(this->SearchBox_(this->FindBox_(row,column),value) ||
+						this->SearchVerticalLine_(column,value) ||
+						this->SearchHorizontalLine_(row,value)));
 }
 
 #endif /* SUDOKU_PUZZLE_H_ */

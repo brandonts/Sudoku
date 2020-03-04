@@ -13,7 +13,7 @@
 bool OnlyPossible(SudokuPuzzle& x)
 {
 	bool change=false;
-	for(int i; i<9; i++)
+	for(int i=0; i<9; i++)
 	{
 		//if(OnlyPossibleBox(x,i))				    change=true;
 		//if(OnlyPossibleVerticalLine(x,i))		change=true;
@@ -70,8 +70,4 @@ SudokuPuzzle SudokuSolver(SudokuPuzzle x)
 	Solver(x);
 	return x;
 }
-
-
-
-
 #endif /* SUDOKU_SOLVER_H_ */

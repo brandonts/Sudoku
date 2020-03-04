@@ -284,7 +284,71 @@ int TestTestSquare()
 	if(testFailures>0){cout<<"Fail\n";return 1;}
 	cout<<"Pass\n";
 	return 0;
-	return 0;
+}
+
+int IsPuzzleCorrupted(SudokuPuzzle p1, SudokuPuzzle p2)//returns number of corrupted squares
+{
+	int corruptedPuzzleCount=0;
+	for(int i=0;i<9;i++)//cycle through all squares on puzzle and make sure origonal numbers didn't get changed
+	{
+			for(int j=0;j<9;j++)
+			{
+				if(p1.Read_(i,j)!=0)
+					{
+						if(p1.Read_(i,j)!=p2.Read_(i,j))corruptedPuzzleCount++;
+						//cout<<"p1("<<i<<","<<j<<") = "<<p1.Read_(i,j);
+						//cout<<"\tp2("<<i<<","<<j<<") = "<<p2.Read_(i,j)<<"\n";
+					}
+			}
+	}
+	return corruptedPuzzleCount;
+}
+
+int TestSudokuSolver()
+{
+	FormatDisplay("TestSudokuSolver()");
+	cout<<"\n";
+	int testFailures=0;
+	vector<int> specificPuzzle
+	{
+		0,3,5,7,0,9,4,0,0,
+		7,0,1,4,0,0,0,0,0,
+		0,9,0,0,2,0,0,5,0,
+		0,6,3,0,4,0,2,7,0,
+		1,0,0,0,0,0,0,0,9,
+		0,7,8,0,9,0,6,1,0,
+		0,5,0,0,6,0,0,8,0,
+		0,0,0,0,0,8,7,0,5,
+		0,0,6,5,0,1,9,4,0
+	};
+	SudokuPuzzle p1{specificPuzzle};
+
+	//test that SudokuSolver did not corrupt puzzle
+	SudokuPuzzle p2=SudokuSolver(p1);
+	int corruptedPuzzleCount=IsPuzzleCorrupted(p1,p2);
+	if(corruptedPuzzleCount>0)
+	{
+		FormatRight("PuzzleNotCorrupted","Fail");
+		testFailures++;
+	}else FormatRight("PuzzleNotCorrupted","Pass");
+
+	//test that IsPuzzleCorrupt catches corrupted puzzle
+	p2=p1;
+	p2.Write_(0,2,6);
+	corruptedPuzzleCount=IsPuzzleCorrupted(p1,p2);
+	if(corruptedPuzzleCount==0)
+	{
+		FormatRight("CatchPuzzleCorrupted","Fail");
+		testFailures++;
+	}else FormatRight("CatchPuzzleCorrupted","Pass");
+
+	//test that SudokuSover returns a valid puzzle solution
+	p2=SudokuSolver(p1);
+	if(p2.Check_()==-1){FormatRight("ValidSolutionReturned","Fail-Invalid");testFailures++;}
+	if(p2.Check_()>0){FormatRight("ValidSolutionReturned","Fail-Not Complete");testFailures++;}
+	if(p2.Check_()==0)FormatRight("ValidSolutionReturned","Pass");
+
+	return testFailures;
 }
 
 int main()
@@ -309,6 +373,9 @@ int main()
 	//sudoku_solver.h tests
 	cout<<"\nTesting sudoku_solver.h:\n";
 	testFailures=0;
+	//testFailures+=TestOnlyPossible();
+	testFailures+=TestSudokuSolver();
+
 
 	int solverTestFailures=testFailures;
 

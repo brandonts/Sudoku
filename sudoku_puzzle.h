@@ -24,6 +24,7 @@ class SudokuPuzzle
 		bool operator==(const SudokuPuzzle &other);
 		bool operator==(const vector<int> &other);
 		void Display_();
+		void Display_(int row,int column);//Displays Puzzle with specifid square highlighted
 		void Write_(int row, int column, int value);//writes value to a square
 		int Read_(int row, int column);//reads value from a square
 		int Check_();//returns -1 if puzzle has become inconsistent, returns the number of empty square otherwise
@@ -68,6 +69,23 @@ void SudokuPuzzle::Display_()
 		for(int j=0;j<9;j++)
 		{
 			cout << table[i*9+j];
+			if(j==2 || j==5 || j==8) cout<<"|";
+			else cout<<" ";
+		}
+	}
+	 cout<<"\n-------------------\n";
+}
+
+void SudokuPuzzle::Display_(int row,int column)
+{
+	for(int i=0;i<9;i++)
+	{
+		if(i==0 || i==3 || i==6) cout<<"\n-------------------\n";
+		else cout<<"\n";
+		cout << "|";
+		for(int j=0;j<9;j++)
+		{
+			if(i==row && j==column)cout<<"X";else cout << table[i*9+j];
 			if(j==2 || j==5 || j==8) cout<<"|";
 			else cout<<" ";
 		}

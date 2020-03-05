@@ -373,9 +373,10 @@ int main()
 	//sudoku_solver.h tests
 	cout<<"\nTesting sudoku_solver.h:\n";
 	testFailures=0;
-	//testFailures+=TestOnlyPossible();
-	testFailures+=TestSudokuSolver();
 
+	//testFailures+=TestOnlyPossible();
+
+	testFailures+=TestSudokuSolver();
 
 	int solverTestFailures=testFailures;
 

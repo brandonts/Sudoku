@@ -26,7 +26,7 @@ int main()
 		cin.clear();
 		value=-1;
 
-		p1.Display_(row,col);
+		Display(p1,row,col);
 		cout<<"(wasd) to move X (e)input (x)solve (q)quit: ";
 		cin>>input;
 		if(input=='e')
@@ -57,11 +57,11 @@ int main()
 			if(p1==p2)cout<<"\nYour Puzzle can not be solved as is.\n";
 			else
 			{
-				p2.Display_();
+				Display(p2);
 				cout<<"Here is your Solved Puzzle!\n\n";
 				break;
 			}
-		}else p1.Display_(row,col);
+		}else Display(p1,row,col);
 	}
 
 	return 0;

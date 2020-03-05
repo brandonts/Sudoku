@@ -9,8 +9,6 @@ Currently there is:
   (4) sudoku_solver.cc is the front end that allows the user to enter a SudokuPuzzle and recieve a solution.
 
 To do List:  
-  add more comprehensive unit testing
-  improve user interface: add input validation, show where user is in input, allow corrections
   complete sudoku_solver.h so it is not always using brute force to solve
 
 Future possibilities:

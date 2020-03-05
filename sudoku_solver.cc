@@ -42,7 +42,7 @@ int main()
 		}else if(input=='w'){if(row==0)row+=8;else row-=1;}
 		else if(input=='a'){if(col==0)col+=8;else col-=1;}
 		else if(input=='s'){if(row==8)row-=8;else row+=1;}
-		else if(input=='d'){if(col==8)col-=8;else col+=1;}
+		else if(input=='d'){if(col==8){col-=8;row+=1;}else col+=1;}
 		else if(input=='q')break;
 		else if(input=='x')
 		{
@@ -52,6 +52,7 @@ int main()
 			else
 			{
 				p2.Display_();
+				cout<<"Here is your Solved Puzzle!\n\n";
 				break;
 			}
 		}else p1.Display_(row,col);

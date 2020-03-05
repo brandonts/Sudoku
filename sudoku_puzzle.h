@@ -63,34 +63,39 @@ void SudokuPuzzle::Display_()
 {
 	for(int i=0;i<9;i++)
 	{
-		if(i==0 || i==3 || i==6) cout<<"\n-------------------\n";
+		if(i==0 || i==3 || i==6) cout<<"\n-------------------------\n";
 		else cout<<"\n";
-		cout << "|";
+		cout << "| ";
 		for(int j=0;j<9;j++)
 		{
 			cout << table[i*9+j];
-			if(j==2 || j==5 || j==8) cout<<"|";
+			if(j==2 || j==5 || j==8) cout<<" | ";
 			else cout<<" ";
 		}
 	}
-	 cout<<"\n-------------------\n";
+	 cout<<"\n-------------------------\n";
 }
 
 void SudokuPuzzle::Display_(int row,int column)
 {
 	for(int i=0;i<9;i++)
 	{
-		if(i==0 || i==3 || i==6) cout<<"\n-------------------\n";
+		if(i==0 || i==3 || i==6) cout<<"\n-------------------------\n";
 		else cout<<"\n";
-		cout << "|";
 		for(int j=0;j<9;j++)
 		{
-			if(i==row && j==column)cout<<"X";else cout << table[i*9+j];
-			if(j==2 || j==5 || j==8) cout<<"|";
-			else cout<<" ";
+			if(j==0) cout<<"|";
+			if(i==row && j==column) cout<<"("<<table[i*9+j]<<")";
+			else if(i==row && j==column+1) cout<<table[i*9+j];
+			else cout<<" "<<table[i*9+j];
+			if(j==2 || j==5 || j==8)
+			{
+				if(i==row && j==column) cout<<"| ";
+				else cout<<" |";
+			}
 		}
 	}
-	 cout<<"\n-------------------\n";
+	 cout<<"\n-------------------------\n";
 }
 
 void SudokuPuzzle::Write_(int row, int column, int value)

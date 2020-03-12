@@ -369,24 +369,12 @@ int main()
 	testFailures+=TestSearchHorizontalLine();
 	testFailures+=TestFindBox();
 	testFailures+=TestTestSquare();
+	testFailures+=TestSudokuSolver();
 
 	int puzzleTestFailures=testFailures;
 
-	//sudoku_solver.h tests
-	cout<<"\nTesting sudoku_solver.h:\n";
-	testFailures=0;
-
-	//testFailures+=TestOnlyPossible();
-
-	testFailures+=TestSudokuSolver();
-
-	int solverTestFailures=testFailures;
-
 	if(puzzleTestFailures==0)cout<<"\nsudoku_puzzle.h passed all tests!\n";
 	else cout<<"sudoku_puzzle.h failed "<<puzzleTestFailures<<" tests.\n";
-
-	if(solverTestFailures==0)cout<<"sudoku_solver.h passed all tests!\n";
-	else cout<<"sudoku_solver.h failed "<<solverTestFailures<<" tests.\n";
 
 	//Run Time testing
 	/*vector<int> specificPuzzle
@@ -400,7 +388,7 @@ int main()
 		0,1,2,3,4,5,6,7,8,
 		3,4,5,6,7,8,0,1,2,
 		6,7,8,0,1,2,3,4,0
-	};*/
+	};
 	vector<int> specificPuzzle
 	{
 		0,3,5,7,0,9,4,0,0,
@@ -422,6 +410,6 @@ int main()
 
   std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()
             << " nanoseconds" << std::endl;
-
+*/
 	return 0;
 }

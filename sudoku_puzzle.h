@@ -252,4 +252,51 @@ bool SudokuPuzzle::TestSquare_(int row, int column, int value)//returns true whe
 						this->SearchHorizontalLine_(row,value)));
 }
 
+int Solver(SudokuPuzzle& x)
+{
+	SudokuPuzzle temp=x;
+	while(x.Check_()>0) //no exit until puzzle complete or unsolvableprovidesprovidesprovides
+	{
+		bool change=false;
+		//if(OnlyPossible(x))	change=true;
+		//if(Elimination(x))	change=true;
+
+		if(change==false)//This will recursively guess every possible solution until solved
+		{
+			for(int i=0; i<9; i++)
+			{
+				for(int j=0; j<9; j++)
+				{
+					if(temp.Read_(i,j)==0)
+					{
+						for(int value=1; value<11; value++)
+						{
+							if(value==10) return -1;//returns -1 when all possible solution has been attempted without valid solution
+
+							if(temp.TestSquare_(i,j,value)) //use 700ns test to prevent 32,000ns Puzzle creation if unnecessary
+							{
+								SudokuPuzzle guess=temp;
+								guess.Write_(i,j,value);
+								if(Solver(guess)==0)//when Solver returns check if puzzle is solved
+								{
+									if(guess.Check_()==0)x=guess;//when puzzle is complete asigns guess to &x
+									return 0;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	if(temp.Check_()==-1) return -1;
+	return 0;
+}
+
+SudokuPuzzle SudokuSolver(SudokuPuzzle x)
+{
+	Solver(x);
+	return x;
+}
+
 #endif /* SUDOKU_PUZZLE_H_ */

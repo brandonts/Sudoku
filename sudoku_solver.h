@@ -69,7 +69,7 @@ int Solver(SudokuPuzzle& x)
 		//if(OnlyPossible(x))	change=true;
 		//if(Elimination(x))	change=true;
 
-		if(change==false)//This will grind out the answer when more elegant solutions fail
+		if(change==false)//This will recursively guess every possible solution until solved
 		{
 			for(int i=0; i<9; i++)
 			{
@@ -79,18 +79,17 @@ int Solver(SudokuPuzzle& x)
 					{
 						for(int value=1; value<11; value++)
 						{
-							if(value==10) return -1;
-							SudokuPuzzle guess=temp;
-							//if(guess.TestSquare_(i,j,value)) //this test actually makes program slower(48ms vs3 8ms)
+							if(value==10) return -1;//returns -1 when all possible solution has been attempted without valid solution
+
+							if(temp.TestSquare_(i,j,value)) //use 700ns test to prevent 32,000ns Puzzle creation if unnecessary
 							{
+								SudokuPuzzle guess=temp;
 								guess.Write_(i,j,value);
-								//Display(guess);
-								Solver(guess);
-							}
-							if(guess.Check_()==0)
-							{
-								x=guess;
-								return 0;
+								if(Solver(guess)==0)//when Solver returns check if puzzle is solved
+								{
+									if(guess.Check_()==0)x=guess;//when puzzle is complete asigns guess to &x
+									return 0;
+								}
 							}
 						}
 					}
@@ -99,7 +98,6 @@ int Solver(SudokuPuzzle& x)
 		}
 	}
 	if(temp.Check_()==-1) return -1;
-	x=temp;
 	return 0;
 }
 

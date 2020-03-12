@@ -8,6 +8,8 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <chrono>
+typedef std::chrono::high_resolution_clock Clock;
 
 #include "sudoku_solver.h"
 #include "sudoku_puzzle.h"
@@ -385,6 +387,41 @@ int main()
 
 	if(solverTestFailures==0)cout<<"sudoku_solver.h passed all tests!\n";
 	else cout<<"sudoku_solver.h failed "<<solverTestFailures<<" tests.\n";
+
+	//Run Time testing
+	/*vector<int> specificPuzzle
+	{
+		1,2,3,4,5,6,7,8,0,
+		4,5,6,7,8,0,1,2,3,
+		7,8,0,1,2,3,4,5,6,
+		2,3,4,5,6,7,8,0,1,
+		5,6,7,8,0,1,2,3,4,
+		8,0,1,2,3,4,5,6,7,
+		0,1,2,3,4,5,6,7,8,
+		3,4,5,6,7,8,0,1,2,
+		6,7,8,0,1,2,3,4,0
+	};*/
+	vector<int> specificPuzzle
+	{
+		0,3,5,7,0,9,4,0,0,
+		7,0,1,4,0,0,0,0,0,
+		0,9,0,0,2,0,0,5,0,
+		0,6,3,0,4,0,2,7,0,
+		1,0,0,0,0,0,0,0,9,
+		0,7,8,0,9,0,6,1,0,
+		0,5,0,0,6,0,0,8,0,
+		0,0,0,0,0,8,7,0,5,
+		0,0,6,5,0,1,9,4,0
+	};
+	SudokuPuzzle p1{specificPuzzle};
+	auto t1 = Clock::now();
+	SudokuSolver(p1);
+	auto t2 = Clock::now();
+	SudokuPuzzle p2=SudokuSolver(p1);
+
+
+  std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()
+            << " nanoseconds" << std::endl;
 
 	return 0;
 }

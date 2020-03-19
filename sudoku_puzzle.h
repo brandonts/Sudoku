@@ -24,6 +24,7 @@ class SudokuPuzzle
 		SudokuPuzzle(vector<int> v);
 		bool operator==(const SudokuPuzzle &other);
 		bool operator==(const vector<int> &other);
+		bool operator!=(const vector<int> &other);
 		void Write_(int row, int column, int value);//writes value to a square
 		int Read_(int row, int column);//reads value from a square
 		int Check_();//returns -1 if puzzle has become inconsistent, returns the number of empty square otherwise
@@ -55,6 +56,11 @@ bool SudokuPuzzle::operator==(const SudokuPuzzle &other)
 bool SudokuPuzzle::operator==(const vector<int> &other)
 {
 	return(this->table==other);
+}
+
+bool SudokuPuzzle::operator!=(const vector<int> &other)
+{
+	return !(this->operator==(other));
 }
 
 void SudokuPuzzle::Display_()
@@ -269,7 +275,7 @@ bool SudokuPuzzle::TestSquare_(int row, int column, int value)//returns true whe
 						this->SearchHorizontalLine_(row,value)));
 }
 
-vector<int> OnlyPossible(SudokuPuzzle x)//returns vector<int> with {row,col,value} of first onlypossible found
+int OnlyPossible(SudokuPuzzle &x)//returns 0 and writes value when finds onlypossible, returns -1 when none are found
 {
 	for(int value=1; value<10; value++)
 	{
@@ -289,7 +295,6 @@ vector<int> OnlyPossible(SudokuPuzzle x)//returns vector<int> with {row,col,valu
 				}
 			}
 		}
-
 		//check each Box to see if it has Only one possible spot for value
 		for(int i=0; i<9; i++)
 		{
@@ -297,39 +302,65 @@ vector<int> OnlyPossible(SudokuPuzzle x)//returns vector<int> with {row,col,valu
 			{
 				if(temp.Read_(i,j)==0)
 				{
-					vector<int> testSquare{i,j,value};
-					if(temp.SearchHorizontalLine_(i,-1)==8)  return testSquare;
-					if(temp.SearchVerticalLine_(j,-1)==8)    return testSquare;
-					if(temp.SearchBox_(temp.FindBox_(i,j),-1)==8) return testSquare;
+					bool found=false;
+					if(temp.SearchHorizontalLine_(i,-1)==8)  found=true;
+					if(temp.SearchVerticalLine_(j,-1)==8)    found=true;
+					if(temp.SearchBox_(temp.FindBox_(i,j),-1)==8) found=true;
+					if(found)
+					{
+						x.Write_(i,j,value);
+						return 0;
+					}
 				}
 			}
 		}
 
 	}
-	vector<int> fail{-1,-1,-1};
-	return fail;
+	return -1;
+}
+
+int Elimination(SudokuPuzzle &x)
+{
+	int change=false;
+	for(int i=0; i<9; i++)
+	{
+		for(int j=0; j<9; j++)
+		{
+			int possible_value=0;
+			int possible_count=0;
+			if(x.Read_(i,j)==0)
+			{
+				for(int value=1; value<10; value++)
+				{
+					if(x.TestSquare_(i,j,value)==true)
+					{
+						possible_value=value;
+						possible_count++;
+					}
+				}
+			}
+			if(possible_count==1)
+			{
+				x.Write_(i,j,possible_value);
+				return 0;
+			}
+		}
+	}
+	return -1;
 }
 
 int Solver(SudokuPuzzle& x)
 {
 	SudokuPuzzle temp=x;
 
-	vector<int>fail={-1,-1,-1};
-	int pause=0;
 	while(x.Check_()>0) //no exit until puzzle complete or unsolvable
 	{
 		bool change=false;
-		vector<int> onlyPossible=OnlyPossible(temp);
-		while(onlyPossible!=fail)
-		{
-			temp.Write_(onlyPossible[0],onlyPossible[1],onlyPossible[2]);
-			change=true;
-			onlyPossible=OnlyPossible(temp);
-		}
 
-		//if(Elimination(x))	change=true;
+		if(OnlyPossible(temp))change=true;
+		if(Elimination(temp)) change=true;
 
-		if(change==false)//This will recursively guess every possible solution until solved
+		if(change==false)	//This will recursively guess every possible solution until solved
 		{
 			for(int i=0; i<9; i++)
 			{

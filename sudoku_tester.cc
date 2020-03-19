@@ -421,9 +421,19 @@ int TestOnlyPossible()
 		0,0,0,0,0,0,0,0,0
 	};
 	SudokuPuzzle p1=puzzle;
-	vector<int> answer{1,1,1};
-	vector<int> result{OnlyPossible(p1)};
-	if(result!=answer)
+	vector<int> answer{
+		2,3,4,0,0,0,0,0,0,
+		5,1,6,0,0,0,0,0,0,
+		7,8,9,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0
+	};
+	OnlyPossible(p1);
+	if(p1!=answer)
 	{
 		FormatRight("Box-one spot","Fail");testFailures++;
 	}else FormatRight("Box-one spot","Pass");
@@ -441,9 +451,20 @@ int TestOnlyPossible()
 		0,0,0,0,0,0,0,0,0
 	};
 	p1=puzzle;
-	answer={4,4,4};
-	result =OnlyPossible(p1);
-	if(result!=answer)
+
+	answer={
+		0,0,0,4,0,4,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,4,
+		0,0,0,0,4,0,0,0,0,
+		0,0,0,0,0,0,0,0,4,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0
+	};
+	OnlyPossible(p1);
+	if(p1!=answer)
 	{
 		FormatRight("Box-cross","Fail");testFailures++;
 	}else FormatRight("Box-cross","Pass");
@@ -461,12 +482,23 @@ int TestOnlyPossible()
 		0,0,0,0,0,0,4,5,0
 	};
 	p1=puzzle;
-	answer={8,8,9};
-	result =OnlyPossible(p1);
-	if(result!=answer)
+
+	answer={
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		9,0,0,0,0,0,0,0,0,
+		9,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,4,5,9
+	};
+	OnlyPossible(p1);
+	if(p1!=answer)
 	{
-		FormatRight("Box-cross-spot","Fail");testFailures++;
-	}else FormatRight("Box-cross-spot","Pass");
+		FormatRight("Box-cross spot","Fail");testFailures++;
+	}else FormatRight("Box-cross spot","Pass");
 
 	puzzle=
 	{
@@ -481,9 +513,20 @@ int TestOnlyPossible()
 		0,0,0,0,0,0,0,0,0
 	};
 	p1=puzzle;
-	answer={-1,-1,-1};
-	result =OnlyPossible(p1);
-	if(result!=answer)
+
+	answer={
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,6,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0
+	};
+	OnlyPossible(p1);
+	if(p1!=answer)
 	{
 		FormatRight("Box-single num","Fail");testFailures++;
 	}else FormatRight("Box-single num","Pass");
@@ -501,9 +544,20 @@ int TestOnlyPossible()
 		0,0,0,0,0,0,0,0,0
 	};
 	p1=puzzle;
-	answer={1,8,5};
-	result =OnlyPossible(p1);
-	if(result!=answer)
+
+	answer={
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,4,6,7,8,9,5,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0
+	};
+	OnlyPossible(p1);
+	if(p1!=answer)
 	{
 		FormatRight("Row-one spot","Fail");testFailures++;
 	}else FormatRight("Row-one spot","Pass");
@@ -521,9 +575,20 @@ int TestOnlyPossible()
 		1,1,0,1,1,1,1,1,1
 	};
 	p1=puzzle;
-	answer={0,2,1};
-	result =OnlyPossible(p1);
-	if(result!=answer)
+
+	answer={
+	0,0,1,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	1,1,0,1,1,1,1,1,1
+	};
+	OnlyPossible(p1);
+	if(p1!=answer)
 	{
 		FormatRight("Row-cross","Fail");testFailures++;
 	}else FormatRight("Row-cross","Pass");
@@ -541,9 +606,21 @@ int TestOnlyPossible()
 		2,0,0,0,0,0,0,0,0
 	};
 	p1=puzzle;
-	answer={1,4,2};
-	result =OnlyPossible(p1);
-	if(result!=answer)
+
+	answer=
+	{
+		0,0,2,0,0,0,0,0,0,
+		0,0,0,0,2,0,0,6,9,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,2,0,0,0,0,0,0,0,
+		0,0,0,0,0,2,0,0,0,
+		0,0,0,0,0,0,2,0,0,
+		0,0,0,2,0,0,0,0,0,
+		2,0,0,0,0,0,0,0,0
+	};
+	OnlyPossible(p1);
+	if(p1!=answer)
 	{
 		FormatRight("Row-Cross-spot","Fail");testFailures++;
 	}else FormatRight("Row-Cross-spot","Pass");
@@ -561,9 +638,21 @@ int TestOnlyPossible()
 		0,9,0,0,0,0,0,0,0
 	};
 	p1=puzzle;
-	answer={3,0,9};
-	result =OnlyPossible(p1);
-	if(result!=answer)
+
+	answer=
+	{
+		0,0,0,0,0,0,0,0,9,
+		0,0,0,0,0,0,0,9,0,
+		0,0,0,0,0,0,9,0,0,
+		9,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,9,0,0,0,
+		0,0,0,0,9,0,0,0,0,
+		0,0,0,9,0,0,0,0,0,
+		0,0,9,0,0,0,0,0,0,
+		0,9,0,0,0,0,0,0,0
+	};
+	OnlyPossible(p1);
+	if(p1!=answer)
 	{
 		FormatRight("Col-cross","Fail");testFailures++;
 	}else FormatRight("Col-cross","Pass");
@@ -581,9 +670,21 @@ int TestOnlyPossible()
 		0,0,0,0,0,0,0,0,0
 	};
 	p1=puzzle;
-	answer={8,8,9};
-	result =OnlyPossible(p1);
-	if(result!=answer)
+
+	answer=
+	{
+		0,0,0,0,0,0,0,0,1,
+		0,0,0,0,0,0,0,0,2,
+		0,0,0,0,0,0,0,0,3,
+		0,0,0,0,0,0,0,0,4,
+		0,0,0,0,0,0,0,0,5,
+		0,0,0,0,0,0,0,0,6,
+		0,0,0,0,0,0,0,0,7,
+		0,0,0,0,0,0,0,0,8,
+		0,0,0,0,0,0,0,0,9
+	};
+	OnlyPossible(p1);
+	if(p1!=answer)
 	{
 		FormatRight("Col-one spot","Fail");testFailures++;
 	}else FormatRight("Col-one spot","Pass");
@@ -592,6 +693,108 @@ int TestOnlyPossible()
 	return 0;
 }
 
+int TestElimination()
+{
+	FormatDisplay("TestElimination()");
+	cout<<"\n";
+	int testFailures=0;
+
+	vector<int> puzzle
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,4,5,6,7,8,0,
+	};
+	SudokuPuzzle p1=puzzle;
+	vector<int> answer{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,4,5,6,7,8,9,
+	};
+	Elimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("Last Row","Fail");testFailures++;
+	}else FormatRight("Last Row","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,0,1,
+		0,0,0,0,0,0,0,0,2,
+		0,0,0,0,0,0,0,0,3,
+		0,0,0,0,0,0,0,0,4,
+		0,0,0,0,0,0,0,0,5,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,7,
+		0,0,0,0,0,0,0,0,8,
+		0,0,0,0,0,0,0,0,9,
+	};
+	p1=puzzle;
+	answer=
+	{
+		0,0,0,0,0,0,0,0,1,
+		0,0,0,0,0,0,0,0,2,
+		0,0,0,0,0,0,0,0,3,
+		0,0,0,0,0,0,0,0,4,
+		0,0,0,0,0,0,0,0,5,
+		0,0,0,0,0,0,0,0,6,
+		0,0,0,0,0,0,0,0,7,
+		0,0,0,0,0,0,0,0,8,
+		0,0,0,0,0,0,0,0,9,
+	};
+	Elimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("Last Col","Fail");testFailures++;
+	}else FormatRight("Last Col","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,4,0,0,0,0,0,
+		0,0,0,0,5,0,0,0,0,
+		0,0,0,0,6,0,0,0,0,
+		0,0,0,0,7,0,0,0,0,
+		0,0,0,0,8,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+	answer=
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,4,9,0,0,0,0,
+		0,0,0,0,5,0,0,0,0,
+		0,0,0,0,6,0,0,0,0,
+		0,0,0,0,7,0,0,0,0,
+		0,0,0,0,8,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	Elimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("Cross","Fail");testFailures++;
+	}else FormatRight("Cross","Pass");
+
+
+	if(testFailures>0)return testFailures;
+	return 0;
+}
 int main()
 {
 	//sudoku_puzzle.h tests
@@ -610,6 +813,7 @@ int main()
 	testFailures+=TestTestSquare();
 	testFailures+=TestOnlyPossible();
 	testFailures+=TestSudokuSolver();
+	testFailures+=TestElimination();
 
 	int puzzleTestFailures=testFailures;
 
@@ -629,7 +833,7 @@ int main()
 		3,4,5,6,7,8,0,1,2,
 		6,7,8,0,1,2,3,4,0
 	};*/
-	vector<int> specificPuzzle
+	vector<int> specificPuzzle//origonal specific puzzle
 	{
 		0,3,5,7,0,9,4,0,0,
 		7,0,1,4,0,0,0,0,0,
@@ -641,11 +845,24 @@ int main()
 		0,0,0,0,0,8,7,0,5,
 		0,0,6,5,0,1,9,4,0
 	};
+	/*
+	vector<int> specificPuzzle//hard puzzle needs to use guess
+	{
+		0,0,0,0,6,0,1,0,9,
+		0,4,9,0,2,0,0,0,0,
+		7,0,0,1,0,0,0,8,0,
+		0,0,3,2,0,0,0,1,0,
+		2,0,5,0,0,0,0,7,0,
+		0,0,7,9,0,0,0,0,8,
+		6,2,0,0,0,0,3,0,0,
+		0,0,0,8,5,0,0,0,1,
+		0,5,0,0,0,6,8,0,0
+	};*/
 	SudokuPuzzle p1{specificPuzzle};
 	auto t1 = Clock::now();
 	SudokuSolver(p1);
 	auto t2 = Clock::now();
-	SudokuPuzzle p2=SudokuSolver(p1);
+
 
 
   std::cout << std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count()

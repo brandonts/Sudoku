@@ -275,6 +275,65 @@ bool SudokuPuzzle::TestSquare_(int row, int column, int value)//returns true whe
 						this->SearchHorizontalLine_(row,value)));
 }
 
+int BlockLine(SudokuPuzzle &x, int box)
+{
+	int row_start=0;
+	int row_end=0;
+	int col_start=0;
+	int col_end=0;
+
+	switch(box)
+	{
+		case 0: row_start=0; row_end=2; col_start=0; col_end=2; break;
+		case 1: row_start=0; row_end=2; col_start=3; col_end=5; break;
+		case 2: row_start=0; row_end=2; col_start=6; col_end=8; break;
+		case 3: row_start=3; row_end=5; col_start=0; col_end=2; break;
+		case 4: row_start=3; row_end=5; col_start=3; col_end=5; break;
+		case 5: row_start=3; row_end=5; col_start=6; col_end=8; break;
+		case 6: row_start=6; row_end=8; col_start=0; col_end=2; break;
+		case 7: row_start=6; row_end=8; col_start=3; col_end=5; break;
+		case 8: row_start=6; row_end=8; col_start=6; col_end=8; break;
+		default: return -1;
+	}
+	//scan rows of box for blocked row
+	for(int i=row_start; i<=row_end;i++)
+	{
+		int count=0;
+		for(int j=col_start; j<=col_end; j++)
+		{
+			if(x.Read_(i,j)==0) count++;
+		}
+		if(count!=0 && count==x.SearchBox_(box,0))
+		{
+			//BLOCKROW
+			for(int col=0; col<9; col++)
+			{
+				if(col<col_start || col>col_end) x.Write_(i,col,-1);
+			}
+			return 0;
+		}else if(count>1)return -1;//if a row has more than one possible then no need to check columns
+	}
+	//scan cols of box for blocked cols
+	for(int j=col_start; j<=col_end; j++)
+	{
+		int count=0;
+		for(int i=row_start; i<=row_end;i++)
+		{
+			if(x.Read_(i,j)==0) count++;
+		}
+		if(count!=0 && count==x.SearchBox_(box,0))
+		{
+			//BLOCKCOL
+			for(int row=0; row<9; row++)
+			{
+				if(row<row_start || row>row_end) x.Write_(row, j, -1);
+			}
+			return 0;
+		}
+	}
+	return -1;
+
+}
 int OnlyPossible(SudokuPuzzle &x)//returns 0 and writes value when finds onlypossible, returns -1 when none are found
 {
 	for(int value=1; value<10; value++)
@@ -294,6 +353,12 @@ int OnlyPossible(SudokuPuzzle &x)//returns 0 and writes value when finds onlypos
 					}else if(y==0){if(temp.TestSquare_(i,j,value)==false)temp.Write_(i,j,-1);}
 				}
 			}
+		}
+		//scans each box for places where value is restricted to a row or col then
+		//writes -1 to all squares in that row or col of the Puzzle that are not in the box.
+		for(int box=0; box<9; box++)
+		{
+			BlockLine(temp, box);
 		}
 		//check each Box to see if it has Only one possible spot for value
 		for(int i=0; i<9; i++)
@@ -318,7 +383,7 @@ int OnlyPossible(SudokuPuzzle &x)//returns 0 and writes value when finds onlypos
 	}
 	return -1;
 }
-
+//for each square checks box,row, and col to eliminate values-writes if one is left
 int Elimination(SudokuPuzzle &x)
 {
 	int change=false;

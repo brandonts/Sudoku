@@ -13,13 +13,13 @@ Currently there is:
 
   (2) sudoku_solver.cc is the user interface.  It allows the user to enter a SudokuPuzzle and recieve a solution.
 
-  (3) sudoku_solver.h holds the functions sudoku_solver.cc uses primarily for displaying information.
+  (3) sudoku_solver.h holds the functions sudoku_solver.cc used primarily for displaying information.
 
   (4) sudoku_tester.cc is a test suite to provide unit testing.
 
 
 To do List:  
-
+  Check_() can not detect when the only spot for a number is blocked
   Save and Load puzzles
   Partial Solve in user interface
 
@@ -27,5 +27,5 @@ To do List:
 
 Future possibilities:
   (1) gui for entering a puzzle to be solved
-  (2) ability to save a puzzles
+  (2) ability to save puzzles
   (3) sudoku game with hints

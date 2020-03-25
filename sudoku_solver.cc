@@ -27,7 +27,7 @@ int main()
 		value=-1;
 
 		Display(p1,row,col);
-		cout<<"(wasd) to move X (e)input (x)solve (q)quit: ";
+		cout<<"(wasd) to select (e)input (x)solve (q)quit: ";
 		cin>>input;
 		if(input=='e')
 		{

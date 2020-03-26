@@ -13,12 +13,13 @@
 
 using namespace std;
 
-#define DEBUG true
+#define DEBUG false
 
 #if DEBUG
 int guess_counter=0;
 int only_counter=0;
 int elimination_counter=0;
+int blockElimination_counter=0;
 #endif
 
 class SudokuPuzzle
@@ -283,7 +284,7 @@ bool SudokuPuzzle::TestSquare_(int row, int column, int value)//returns true whe
 						this->SearchHorizontalLine_(row,value)));
 }
 
-int BlockLine(SudokuPuzzle &x, int box)
+int BlockLineOnlyPossible(SudokuPuzzle &x, int box)
 {
 	int row_start=0;
 	int row_end=0;
@@ -340,9 +341,10 @@ int BlockLine(SudokuPuzzle &x, int box)
 		}
 	}
 	return -1;
-
 }
-int OnlyPossible(SudokuPuzzle &x)//returns 0 and writes value when finds onlypossible, returns -1 when none are found
+//returns 0 and writes value when finds onlypossible, returns -1 when none are found
+//only finds one per call
+int OnlyPossible(SudokuPuzzle &x)
 {
 	for(int value=1; value<10; value++)
 	{
@@ -366,7 +368,7 @@ int OnlyPossible(SudokuPuzzle &x)//returns 0 and writes value when finds onlypos
 		//writes -1 to all squares in that row or col of the Puzzle that are not in the box.
 		for(int box=0; box<9; box++)
 		{
-			BlockLine(temp, box);
+			BlockLineOnlyPossible(temp, box);
 		}
 		//check each Box to see if it has Only one possible spot for value
 		for(int i=0; i<9; i++)
@@ -391,7 +393,110 @@ int OnlyPossible(SudokuPuzzle &x)//returns 0 and writes value when finds onlypos
 	}
 	return -1;
 }
+
+int BlockLineElimination(SudokuPuzzle &x)
+{
+	int row_start=0;
+	int row_end=0;
+	int col_start=0;
+	int col_end=0;
+	for(int box=0; box<9; box++)
+	{
+		switch(box)
+		{
+			case 0: row_start=0; row_end=2; col_start=0; col_end=2; break;
+			case 1: row_start=0; row_end=2; col_start=3; col_end=5; break;
+			case 2: row_start=0; row_end=2; col_start=6; col_end=8; break;
+			case 3: row_start=3; row_end=5; col_start=0; col_end=2; break;
+			case 4: row_start=3; row_end=5; col_start=3; col_end=5; break;
+			case 5: row_start=3; row_end=5; col_start=6; col_end=8; break;
+			case 6: row_start=6; row_end=8; col_start=0; col_end=2; break;
+			case 7: row_start=6; row_end=8; col_start=3; col_end=5; break;
+			case 8: row_start=6; row_end=8; col_start=6; col_end=8; break;
+			default: return -1;
+		}
+		//scan rows of box for blocked row
+		for(int i=row_start; i<=row_end;i++)
+		{
+			int count=0;
+			for(int j=col_start; j<=col_end; j++)
+			{
+				if(x.Read_(i,j)==0) count++;
+			}
+			if(count!=0 && count==x.SearchBox_(box,0))
+			{
+				//BLOCKROW
+				for(int col=0; col<9; col++)
+				{
+					if(col<col_start || col>col_end)
+					{//run eliminate with values removed
+						int possible_value=0;
+						int possible_count=0;
+						if(x.Read_(i,col)==0)
+						{
+							for(int value=1; value<10; value++)
+							{
+								//test the squares to see if value is possible and that value is not one of the possibles from the  blocked row
+								if(x.TestSquare_(i,col,value)==true  && x.SearchBox_(box,value)==1)
+								{
+									possible_value=value;
+									possible_count++;
+								}
+							}
+						}
+						if(possible_count==1)
+						{
+							x.Write_(i,col,possible_value);
+							return 0;
+						}
+					}
+				}
+			}
+		}
+		//scan cols of box for blocked cols
+		for(int j=col_start; j<=col_end; j++)
+		{
+			int count=0;
+			for(int i=row_start; i<=row_end;i++)
+			{
+				if(x.Read_(i,j)==0) count++;
+			}
+			if(count!=0 && count==x.SearchBox_(box,0))
+			{
+				//BLOCKCOL
+				for(int row=0; row<9; row++)
+				{
+					if(row<row_start || row>row_end)
+					{//run eliminate with values removed
+						int possible_value=0;
+						int possible_count=0;
+						if(x.Read_(row,j)==0)
+						{
+							for(int value=1; value<10; value++)
+							{
+								//test the squares to see if value is possible and that value is not one of the possibles from the  blocked col
+								if(x.TestSquare_(row,j,value)==true  && x.SearchBox_(box,value)==1)
+								{
+									possible_value=value;
+									possible_count++;
+								}
+							}
+						}
+						if(possible_count==1)
+						{
+							x.Write_(row,j,possible_value);
+							return 0;
+						}
+					}
+				}
+			}
+		}
+	}
+	return -1;
+}
+
 //for each square checks box,row, and col to eliminate values-writes if one is left
+//only finds one per call
 int Elimination(SudokuPuzzle &x)
 {
 	int change=false;
@@ -419,6 +524,7 @@ int Elimination(SudokuPuzzle &x)
 			}
 		}
 	}
+
 	return -1;
 }
 
@@ -430,19 +536,28 @@ int Solver(SudokuPuzzle& x)
 	{
 		bool change=false;
 
-		if(OnlyPossible(temp)==0)
+		while(Elimination(temp)==0)
 		{
 			change=true;
-#if DEBUG
-			only_counter++;
-#endif
-		}
-		if(Elimination(temp)==0)
-		{
-			change=true;
-#if DEBUG
+			#if DEBUG
 			elimination_counter++;
-#endif
+			#endif
+		}
+
+		while(BlockLineElimination(temp)==0)
+		{
+			change=true;
+			#if DEBUG
+			blockElimination_counter++;
+			#endif
+		}
+
+		while(OnlyPossible(temp)==0)
+		{
+			change=true;
+			#if DEBUG
+			only_counter++;
+			#endif
 		}
 
 		if(change==false)	//This will recursively guess every possible solution until solved
@@ -461,11 +576,14 @@ int Solver(SudokuPuzzle& x)
 							{
 								SudokuPuzzle guess=temp;
 								guess.Write_(i,j,value);
-#if DEBUG
+								#if DEBUG
 								guess_counter++;
-								cout<<"guess: "<<guess_counter<<" only_counter: "<<only_counter<<" elimination_counter: "<<elimination_counter<<" \n";
+								cout<<"guess: "<<guess_counter
+										<<"\nonly_counter: "<<only_counter
+										<<"\nelimination_counter: "<<elimination_counter
+										<<"\nblockElimination_counter: "<<blockElimination_counter;
 								guess.Display_();
-#endif
+								#endif
 								if(Solver(guess)==0)//when Solver returns check if puzzle is solved
 								{
 									if(guess.Check_()==0)x=guess;//when puzzle is complete asigns guess to &x
@@ -486,15 +604,23 @@ int Solver(SudokuPuzzle& x)
 SudokuPuzzle SudokuSolver(SudokuPuzzle x)
 {
 	int squares=x.Check_();
-#if DEBUG
-		guess_counter=0;
-		only_counter=0;
-		elimination_counter=0;
-#endif
+
+	#if DEBUG
+	guess_counter=0;
+	only_counter=0;
+	elimination_counter=0;
+	blockElimination_counter=0;
+	#endif
+
 	Solver(x);
-#if DEBUG
-	cout<<"Empty squares: "<<squares<< " guess: "<<guess_counter<<" only_counter: "<<only_counter<<" elimination_counter: "<<elimination_counter<<" \n";
-#endif
+
+	#if DEBUG
+	cout<<"guess: "<<guess_counter
+			<<"\nonly_counter: "<<only_counter
+			<<"\nelimination_counter: "<<elimination_counter
+			<<"\nblockElimination_counter: "<<blockElimination_counter<<"\n";
+	#endif
+
 	return x;
 }
 

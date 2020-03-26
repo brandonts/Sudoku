@@ -402,9 +402,9 @@ int TestSudokuSolver()
 	return testFailures;
 }
 
-int TestBlockLine()
+int TestBlockLineOnlyPossible()
 {
-	FormatDisplay("TestBlockLine()");
+	FormatDisplay("TestBlockLineOnlyPossible()");
 	cout<<"\n";
 	int testFailures=0;
 
@@ -432,7 +432,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0
 	};
-	BlockLine(p1,0);
+	BlockLineOnlyPossible(p1,0);
 	if(p1!=answer)
 	{
 		FormatRight("box 0, row 0","Fail");testFailures++;p1.Display_();
@@ -463,7 +463,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0
 	};
-	BlockLine(p1,1);
+	BlockLineOnlyPossible(p1,1);
 	if(p1!=answer)
 	{
 		FormatRight("box 1, row 1","Fail");testFailures++;p1.Display_();
@@ -495,7 +495,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0
 	};
-	BlockLine(p1,2);
+	BlockLineOnlyPossible(p1,2);
 	if(p1!=answer)
 	{
 		FormatRight("box 2, row 2","Fail");testFailures++;p1.Display_();
@@ -527,7 +527,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0
 	};
-	BlockLine(p1,3);
+	BlockLineOnlyPossible(p1,3);
 	if(p1!=answer)
 	{
 		FormatRight("box 3, row 3","Fail");testFailures++;p1.Display_();
@@ -559,7 +559,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,
 	};
-	BlockLine(p1,4);
+	BlockLineOnlyPossible(p1,4);
 	if(p1!=answer)
 	{
 		FormatRight("box 4, row 4","Fail");testFailures++;p1.Display_();
@@ -589,7 +589,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,0,0,0,
 		0,0,0,0,0,0,0,0,0,
 	};
-	BlockLine(p1,5);
+	BlockLineOnlyPossible(p1,5);
 	if(p1!=answer)
 	{
 		FormatRight("box 5, row 5","Fail");testFailures++;p1.Display_();
@@ -620,7 +620,7 @@ int TestBlockLine()
 		-1,-1,-1,0,0,0,0,0,0,
 		-1,-1,-1,0,0,0,0,0,0,
 	};
-	BlockLine(p1,6);
+	BlockLineOnlyPossible(p1,6);
 	if(p1!=answer)
 	{
 		FormatRight("box 6, row 6","Fail");testFailures++;p1.Display_();
@@ -651,7 +651,7 @@ int TestBlockLine()
 		-1,-1,-1,0,0,0,-1,-1,-1,
 		0,0,0,-1,-1,-1,0,0,0,
 	};
-	BlockLine(p1,7);
+	BlockLineOnlyPossible(p1,7);
 	if(p1!=answer)
 	{
 		FormatRight("box 7, row 7","Fail");testFailures++;p1.Display_();
@@ -682,7 +682,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,-1,-1,-1,
 		-1,-1,-1,-1,-1,-1,0,0,0,
 	};
-	BlockLine(p1,8);
+	BlockLineOnlyPossible(p1,8);
 	if(p1!=answer)
 	{
 		FormatRight("box 8, row 8","Fail");testFailures++;p1.Display_();
@@ -713,7 +713,7 @@ int TestBlockLine()
 		-1,0,0,0,0,0,0,0,0,
 		-1,0,0,0,0,0,0,0,0,
 	};
-	BlockLine(p1,0);
+	BlockLineOnlyPossible(p1,0);
 	if(p1!=answer)
 	{
 		FormatRight("box 0, col 0","Fail");testFailures++;p1.Display_();
@@ -744,7 +744,7 @@ int TestBlockLine()
 		0,0,0,-1,0,0,0,0,0,
 		0,0,0,-1,0,0,0,0,0,
 	};
-	BlockLine(p1,1);
+	BlockLineOnlyPossible(p1,1);
 	if(p1!=answer)
 	{
 		FormatRight("box 1, col 3","Fail");testFailures++;p1.Display_();
@@ -775,7 +775,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,-1,0,0,
 		0,0,0,0,0,0,-1,0,0,
 	};
-	BlockLine(p1,2);
+	BlockLineOnlyPossible(p1,2);
 	if(p1!=answer)
 	{
 		FormatRight("box 2, col 6","Fail");testFailures++;p1.Display_();
@@ -806,7 +806,7 @@ int TestBlockLine()
 		0,-1,0,0,0,0,0,0,0,
 		0,-1,0,0,0,0,0,0,0,
 	};
-	BlockLine(p1,3);
+	BlockLineOnlyPossible(p1,3);
 	if(p1!=answer)
 	{
 		FormatRight("box 3, col 1","Fail");testFailures++;p1.Display_();
@@ -837,7 +837,7 @@ int TestBlockLine()
 		0,0,0,0,-1,0,0,0,0,
 		0,0,0,0,-1,0,0,0,0,
 	};
-	BlockLine(p1,4);
+	BlockLineOnlyPossible(p1,4);
 	if(p1!=answer)
 	{
 		FormatRight("box 4, col 4","Fail");testFailures++;p1.Display_();
@@ -868,7 +868,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,0,-1,0,
 		0,0,0,0,0,0,0,-1,0,
 	};
-	BlockLine(p1,5);
+	BlockLineOnlyPossible(p1,5);
 	if(p1!=answer)
 	{
 		FormatRight("box 5, col 7","Fail");testFailures++;p1.Display_();
@@ -899,7 +899,7 @@ int TestBlockLine()
 		-1,-1,0,0,0,0,0,0,0,
 		-1,-1,0,0,0,0,0,0,0,
 	};
-	BlockLine(p1,6);
+	BlockLineOnlyPossible(p1,6);
 	if(p1!=answer)
 	{
 		FormatRight("box 6, col 2","Fail");testFailures++;p1.Display_();
@@ -930,7 +930,7 @@ int TestBlockLine()
 		0,0,0,-1,-1,0,0,0,0,
 		0,0,0,-1,-1,0,0,0,0,
 	};
-	BlockLine(p1,7);
+	BlockLineOnlyPossible(p1,7);
 	if(p1!=answer)
 	{
 		FormatRight("box 7, col 5","Fail");testFailures++;p1.Display_();
@@ -961,7 +961,7 @@ int TestBlockLine()
 		0,0,0,0,0,0,-1,-1,0,
 		0,0,0,0,0,0,-1,-1,0,
 	};
-	BlockLine(p1,8);
+	BlockLineOnlyPossible(p1,8);
 	if(p1!=answer)
 	{
 		FormatRight("box 8, col 8","Fail");testFailures++;p1.Display_();
@@ -1262,6 +1262,594 @@ int TestOnlyPossible()
 	return 0;
 }
 
+int TestBlockLineElimination()
+{
+	FormatDisplay("TestBlockLineElimination()");
+	cout<<"\n";
+	int testFailures=0;
+
+	vector<int> puzzle
+	{
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,0,0,0,0,0,0,
+		4,5,6,0,0,0,0,0,5,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,4,0,
+		0,0,0,0,0,0,0,3,0,
+		0,0,0,0,0,0,0,2,0,
+		0,0,0,0,0,0,0,1,0,
+	};
+	SudokuPuzzle p1=puzzle;
+
+	vector<int> answer={
+		0,0,0,0,0,0,0,6,0,
+		1,2,3,0,0,0,0,0,0,
+		4,5,6,0,0,0,0,0,5,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,4,0,
+		0,0,0,0,0,0,0,3,0,
+		0,0,0,0,0,0,0,2,0,
+		0,0,0,0,0,0,0,1,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 0, row 0","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 0, row 0","Pass");
+
+	puzzle=
+	{
+		0,0,0,1,2,3,0,0,0,
+		1,2,3,0,0,0,4,0,5,
+		0,0,0,4,5,6,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,1,2,3,0,0,0,
+		1,2,3,0,0,0,4,6,5,
+		0,0,0,4,5,6,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 1, row 1","Fail");testFailures++;p1.Display_();
+		p1.Display_();
+	}else FormatRight("box 1, row 1","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,1,2,3,
+		0,0,0,0,0,0,9,5,6,
+		1,2,3,5,6,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,0,0,1,2,3,
+		0,0,0,0,0,0,9,5,6,
+		1,2,3,5,6,9,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 2, row 2","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 2, row 2","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,1,2,3,4,5,0,
+		1,2,3,0,0,0,0,0,0,
+		4,5,6,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,1,2,3,4,5,6,
+		1,2,3,0,0,0,0,0,0,
+		4,5,6,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 3, row 3","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 3, row 3","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,1,2,3,0,0,0,
+		1,2,3,0,0,0,4,5,0,
+		0,0,0,4,5,6,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,1,2,3,0,0,0,
+		1,2,3,0,0,0,4,5,6,
+		0,0,0,4,5,6,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 4, row 4","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 4, row 4","Pass");
+	puzzle=
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,2,3,
+		0,0,0,0,0,0,4,5,6,
+		0,1,2,3,4,5,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,2,3,
+		0,0,0,0,0,0,4,5,6,
+		6,1,2,3,4,5,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 5, row 5","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 5, row 5","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,1,2,3,4,5,0,
+		1,2,3,0,0,0,0,0,0,
+		4,5,6,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,1,2,3,4,5,6,
+		1,2,3,0,0,0,0,0,0,
+		4,5,6,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 6, row 6","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 6, row 6","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,1,2,3,0,0,0,
+		0,1,2,0,0,0,3,4,5,
+		0,0,0,4,5,6,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,1,2,3,0,0,0,
+		6,1,2,0,0,0,3,4,5,
+		0,0,0,4,5,6,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 7, row 7","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 7, row 7","Pass");
+
+	puzzle=
+	{
+		1,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,2,3,
+		0,0,0,0,0,0,4,5,6,
+		0,1,2,3,4,5,7,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		1,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,2,3,
+		0,0,0,0,0,0,4,5,6,
+		6,1,2,3,4,5,7,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 8, row 8","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 8, row 8","Pass");
+
+	puzzle=
+	{
+		0,1,2,0,0,0,0,0,0,
+		0,3,4,0,0,0,0,0,0,
+		0,5,6,0,0,0,0,0,0,
+		1,0,0,0,0,0,0,0,0,
+		2,0,0,0,0,0,0,0,0,
+		3,0,0,0,0,0,0,0,0,
+		4,0,0,0,0,0,0,0,0,
+		5,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,1,2,0,0,0,0,0,0,
+		0,3,4,0,0,0,0,0,0,
+		0,5,6,0,0,0,0,0,0,
+		1,0,0,0,0,0,0,0,0,
+		2,0,0,0,0,0,0,0,0,
+		3,0,0,0,0,0,0,0,0,
+		4,0,0,0,0,0,0,0,0,
+		5,0,0,0,0,0,0,0,0,
+		6,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 0, col 0","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 0, col 0","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,1,2,0,0,0,
+		0,0,0,0,3,4,0,0,0,
+		0,0,0,0,5,6,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,0,4,5,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,1,2,0,0,0,
+		0,0,0,0,3,4,0,0,0,
+		0,0,0,0,5,6,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,6,4,5,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 1, col 3","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 1, col 3","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,1,2,
+		0,0,0,0,0,0,0,3,4,
+		0,0,0,0,0,0,0,6,5,
+		0,0,0,0,0,0,1,2,0,
+		0,0,0,0,0,0,0,4,0,
+		0,0,0,0,0,0,3,5,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,0,0,0,1,2,
+		0,0,0,0,0,0,0,3,4,
+		0,0,0,0,0,0,0,6,5,
+		0,0,0,0,0,0,1,2,0,
+		0,0,0,0,0,0,6,4,0,
+		0,0,0,0,0,0,3,5,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 2, col 6","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 2, col 6","Pass");
+
+	puzzle=
+	{
+		0,0,1,2,3,4,5,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,3,4,0,0,0,0,0,0,
+		0,5,6,0,0,0,0,0,0,
+		0,1,2,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		6,0,1,2,3,4,5,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,3,4,0,0,0,0,0,0,
+		0,5,6,0,0,0,0,0,0,
+		0,1,2,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 3, col 1","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 3, col 1","Pass");
+
+	puzzle=
+	{
+		1,2,3,0,4,5,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,1,2,0,0,0,
+		0,0,0,0,3,4,0,0,0,
+		0,0,0,0,5,6,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		1,2,3,6,4,5,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,1,2,0,0,0,
+		0,0,0,0,3,4,0,0,0,
+		0,0,0,0,5,6,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 4, col 4","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 4, col 4","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,3,0,4,
+		0,0,0,0,0,0,5,0,6,
+		0,0,0,0,0,0,1,0,2,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,4,5,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,3,0,4,
+		0,0,0,0,0,0,5,0,6,
+		0,0,0,0,0,0,1,0,2,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,3,4,5,0,0,6,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 5, col 7","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 5, col 7","Pass");
+
+	puzzle=
+	{
+		1,2,0,0,0,0,0,0,0,
+		3,4,5,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,0,0,0,0,0,0,0,
+		3,4,0,0,0,0,0,0,0,
+		5,6,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		1,2,6,0,0,0,0,0,0,
+		3,4,5,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		1,2,0,0,0,0,0,0,0,
+		3,4,0,0,0,0,0,0,0,
+		5,6,0,0,0,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 6, col 2","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 6, col 2","Pass");
+
+	puzzle=
+	{
+		1,2,3,4,8,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,9,8,0,0,0,0,
+		0,0,0,3,4,0,0,0,0,
+		0,0,0,1,2,0,0,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		1,2,3,4,8,9,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,9,8,0,0,0,0,
+		0,0,0,3,4,0,0,0,0,
+		0,0,0,1,2,0,0,0,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 7, col 5","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 7, col 5","Pass");
+
+	puzzle=
+	{
+		1,2,3,4,5,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,2,0,
+		0,0,0,0,0,0,3,4,0,
+		0,0,0,0,0,0,5,6,0,
+	};
+	p1=puzzle;
+
+	answer={
+		1,2,3,4,5,0,0,0,6,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,2,0,
+		0,0,0,0,0,0,3,4,0,
+		0,0,0,0,0,0,5,6,0,
+	};
+	BlockLineElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("box 8, col 8","Fail");testFailures++;p1.Display_();
+	}else FormatRight("box 8, col 8","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	p1=puzzle;
+
+	int value=0;
+	value=BlockLineElimination(p1);
+	if(value=0)
+	{
+		FormatRight("Empty Puzzle return -1","Fail");testFailures++;p1.Display_();
+	}else FormatRight("Empty Puzzle return -1","Pass");
+
+	return testFailures;
+}
+
 int TestElimination()
 {
 	FormatDisplay("TestElimination()");
@@ -1381,10 +1969,12 @@ int main()
 	testFailures+=TestSearchHorizontalLine();
 	testFailures+=TestFindBox();
 	testFailures+=TestTestSquare();
-	testFailures+=TestBlockLine();
+	testFailures+=TestBlockLineOnlyPossible();
 	testFailures+=TestOnlyPossible();
-	testFailures+=TestSudokuSolver();
+	testFailures+=TestBlockLineElimination();
 	testFailures+=TestElimination();
+	testFailures+=TestSudokuSolver();
+
 
 	int puzzleTestFailures=testFailures;
 

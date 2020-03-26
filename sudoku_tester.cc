@@ -1369,6 +1369,7 @@ int main()
 	//sudoku_puzzle.h tests
 	cout<<"Testing sudoku_puzzle.h:\n";
 	int testFailures =0;
+
 	testFailures+=TestEmptyPuzzle();
 	testFailures+=TestSpecificPuzzle();
 	testFailures+=TestPuzzleValidation();
@@ -1403,6 +1404,7 @@ int main()
 		3,4,5,6,7,8,0,1,2,
 		6,7,8,0,1,2,3,4,0
 	};*/
+	/*
 	vector<int> specificPuzzle//origonal specific puzzle
 	{
 		0,3,5,7,0,9,4,0,0,
@@ -1415,7 +1417,7 @@ int main()
 		0,0,0,0,0,8,7,0,5,
 		0,0,6,5,0,1,9,4,0
 	};
-	/*
+	*/
 	vector<int> specificPuzzle//hard puzzle needs to use guess
 	{
 		0,0,0,0,6,0,1,0,9,
@@ -1427,7 +1429,8 @@ int main()
 		6,2,0,0,0,0,3,0,0,
 		0,0,0,8,5,0,0,0,1,
 		0,5,0,0,0,6,8,0,0
-	};*/
+	};
+
 	SudokuPuzzle p1{specificPuzzle};
 	auto t1 = Clock::now();
 	SudokuSolver(p1);

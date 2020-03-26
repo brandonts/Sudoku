@@ -13,6 +13,14 @@
 
 using namespace std;
 
+#define DEBUG true
+
+#if DEBUG
+int guess_counter=0;
+int only_counter=0;
+int elimination_counter=0;
+#endif
+
 class SudokuPuzzle
 {
 	private:
@@ -422,8 +430,20 @@ int Solver(SudokuPuzzle& x)
 	{
 		bool change=false;
 
-		if(OnlyPossible(temp))change=true;
-		if(Elimination(temp)) change=true;
+		if(OnlyPossible(temp)==0)
+		{
+			change=true;
+#if DEBUG
+			only_counter++;
+#endif
+		}
+		if(Elimination(temp)==0)
+		{
+			change=true;
+#if DEBUG
+			elimination_counter++;
+#endif
+		}
 
 		if(change==false)	//This will recursively guess every possible solution until solved
 		{
@@ -441,6 +461,11 @@ int Solver(SudokuPuzzle& x)
 							{
 								SudokuPuzzle guess=temp;
 								guess.Write_(i,j,value);
+#if DEBUG
+								guess_counter++;
+								cout<<"guess: "<<guess_counter<<" only_counter: "<<only_counter<<" elimination_counter: "<<elimination_counter<<" \n";
+								guess.Display_();
+#endif
 								if(Solver(guess)==0)//when Solver returns check if puzzle is solved
 								{
 									if(guess.Check_()==0)x=guess;//when puzzle is complete asigns guess to &x
@@ -460,7 +485,16 @@ int Solver(SudokuPuzzle& x)
 
 SudokuPuzzle SudokuSolver(SudokuPuzzle x)
 {
+	int squares=x.Check_();
+#if DEBUG
+		guess_counter=0;
+		only_counter=0;
+		elimination_counter=0;
+#endif
 	Solver(x);
+#if DEBUG
+	cout<<"Empty squares: "<<squares<< " guess: "<<guess_counter<<" only_counter: "<<only_counter<<" elimination_counter: "<<elimination_counter<<" \n";
+#endif
 	return x;
 }
 

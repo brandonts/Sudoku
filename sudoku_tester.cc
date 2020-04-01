@@ -1850,6 +1850,78 @@ int TestBlockLineElimination()
 	return testFailures;
 }
 
+int TestBlockLineValueElimination()
+{
+	FormatDisplay("BlockLineValueElimination()");
+	cout<<"\n";
+
+	int testFailures=0;
+
+	vector<int> puzzle=
+	{
+		5,8,2,0,6,0,1,0,9,
+		1,4,9,5,2,8,7,0,0,
+		7,3,6,1,0,0,0,8,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	SudokuPuzzle p1=puzzle;
+
+	vector<int> answer={
+		5,8,2,0,6,0,1,4,9,
+		1,4,9,5,2,8,7,0,0,
+		7,3,6,1,0,0,0,8,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+	};
+	BlockLineValueElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("row 0","Fail");testFailures++;p1.Display_();
+	}else FormatRight("row 0","Pass");
+
+	puzzle=
+	{
+		0,0,0,0,0,0,0,5,1,
+		0,0,0,0,0,0,0,6,2,
+		0,0,0,0,0,0,0,0,3,
+		0,0,0,0,0,0,0,0,4,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,7,
+		0,0,0,0,0,0,5,0,8,
+		0,0,0,0,0,0,6,0,0,
+	};
+	p1=puzzle;
+
+	answer={
+		0,0,0,0,0,0,0,5,1,
+		0,0,0,0,0,0,0,6,2,
+		0,0,0,0,0,0,0,0,3,
+		0,0,0,0,0,0,0,0,4,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,0,0,7,
+		0,0,0,0,0,0,5,0,8,
+		0,0,0,0,0,0,6,0,9,
+	};
+	BlockLineValueElimination(p1);
+	if(p1!=answer)
+	{
+		FormatRight("col 8","Fail");testFailures++;p1.Display_();
+	}else FormatRight("col 8","Pass");
+
+	return testFailures;
+}
+
 int TestElimination()
 {
 	FormatDisplay("TestElimination()");
@@ -1972,6 +2044,7 @@ int main()
 	testFailures+=TestBlockLineOnlyPossible();
 	testFailures+=TestOnlyPossible();
 	testFailures+=TestBlockLineElimination();
+	testFailures+=TestBlockLineValueElimination();
 	testFailures+=TestElimination();
 	testFailures+=TestSudokuSolver();
 
@@ -2007,8 +2080,8 @@ int main()
 		0,0,0,0,0,8,7,0,5,
 		0,0,6,5,0,1,9,4,0
 	};
-	*/
-	vector<int> specificPuzzle//hard puzzle needs to use guess
+
+	vector<int> specificPuzzle//hard puzzle needs BlockLineValueElimination()
 	{
 		0,0,0,0,6,0,1,0,9,
 		0,4,9,0,2,0,0,0,0,
@@ -2019,6 +2092,20 @@ int main()
 		6,2,0,0,0,0,3,0,0,
 		0,0,0,8,5,0,0,0,1,
 		0,5,0,0,0,6,8,0,0
+	};
+	*/
+
+	vector<int> specificPuzzle//hard puzzle needs BlockLineValueElimination()
+	{
+		4,0,0,0,0,0,0,0,0,
+		0,7,5,0,0,0,0,0,0,
+		0,0,0,0,5,0,8,6,0,
+		0,0,0,0,0,2,1,0,0,
+		0,0,0,4,0,0,6,0,0,
+		2,0,0,0,7,1,0,4,3,
+		0,5,0,0,8,7,0,0,0,
+		0,9,1,0,6,0,0,7,0,
+		0,0,2,0,0,0,0,5,0
 	};
 
 	SudokuPuzzle p1{specificPuzzle};

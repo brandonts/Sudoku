@@ -7,9 +7,15 @@ Currently there is:
     Logic:
       -Recursive guess and check grinder
 
-      -OnlyPossible finds squares that are the only spot left for a certain value in a box,column, or row.
+      -OnlyPossible() finds squares that are the only spot left for a certain value in a box,column, or row.
 
-      -Elimination find squares that have only one value possible because other 8 have been eliminated
+      -Elimination() find squares that have only one value possible because other 8 have been eliminated
+
+      -BlockLineElimination() checks each box to see if only one row or col is left because if it is you can block the possible values for that box
+      from all squares in that row or col outside of the box in an elimination type sweep
+
+      -BlockLineValueElimination() checks each box to see if any of its rows or cols have the only squares in that box that can hold any value.
+      when it finds such a row or col it it runs an elimination type sweep of the row or col with those values blocked
 
   (2) sudoku_solver.cc is the user interface.  It allows the user to enter a SudokuPuzzle and recieve a solution.
 

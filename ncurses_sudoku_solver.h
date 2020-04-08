@@ -3,6 +3,7 @@
 #define NCURSES_SUDOKU_SOLVER_H_
 
 #include "sudoku_puzzle.h"
+#include "sudoku_logic.h"
 
 void Display(SudokuPuzzle &p1)
 {

@@ -9,7 +9,7 @@ int main()
   keypad(stdscr,TRUE);
 
   SudokuPuzzle p1{};
-  char input{};
+  wchar_t input{};
   int value=-1;
   int row=0;
   int col=0;
@@ -28,10 +28,10 @@ int main()
       p1.Write_(row,col,value);
       if(col<8)col++;else {col=0;row++;}
     }
-    else if(input=='w'){if(row==0)row+=8;else row-=1;}
-    else if(input=='a'){if(col==0)col+=8;else col-=1;}
-    else if(input=='s'){if(row==8)row-=8;else row+=1;}
-    else if(input=='d')
+    else if(input=='w'|| input==KEY_UP){if(row==0)row+=8;else row-=1;}
+    else if(input=='a'|| input==KEY_LEFT){if(col==0)col+=8;else col-=1;}
+    else if(input=='s'|| input==KEY_DOWN){if(row==8)row-=8;else row+=1;}
+    else if(input=='d'|| input==KEY_RIGHT)
       {
         if(col==8)
         {
@@ -45,15 +45,18 @@ int main()
       while(true)
       {
         char ch=getch();
-        if(ch=='y'){p1={};break;}
+        if(ch=='y'){p1={};row=0;col=0;break;}
         if(ch=='n')break;
       }
     }
     else if(input=='x')
     {
-      printw("\nNow Solving Your Puzzle.\n");
       SudokuPuzzle p2=SudokuSolver(p1);
-      if(p1==p2)printw("\nYour Puzzle can not be solved as is.\n");
+      if(p1==p2)
+      {
+        printw(" Your Puzzle can not be solved as is.");
+        getch();
+      }
       else
       {
         Display(p2);

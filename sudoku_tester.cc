@@ -12,6 +12,7 @@
 typedef std::chrono::high_resolution_clock Clock;
 
 #include "sudoku_solver.h"
+#include "sudoku_logic.h"
 #include "sudoku_puzzle.h"
 
 

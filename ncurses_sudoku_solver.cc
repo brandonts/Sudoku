@@ -19,7 +19,7 @@ int main()
     value=-1;
 
     Display(p1,row,col);
-    printw("(wasd) to select, (x)solve (c)clear (q)quit: ");
+    printw("(wasd) to select, (x)solve (c)clear (v)save (l)load (q)quit: ");
     input=getch();
     value=input-'0';
 
@@ -41,7 +41,7 @@ int main()
     else if(input=='q')break;
     else if(input=='c')
     {
-      printw("Are you sure (y/n)?");
+      printw("\nAre you sure (y/n)?");
       while(true)
       {
         char ch=getch();
@@ -63,7 +63,19 @@ int main()
         printw("Here is your Solved Puzzle!");
         getch();
       }
-    }else Display(p1,row,col);
+    }else if(input=='v')
+    {
+      printw("\nThis will overwrite current save, Are you sure (y/n)?");
+      char ch=getch();
+      if(ch=='y')WriteFile(p1,"./save.txt");
+    }
+    else if(input=='l')
+    {
+      printw("\nThis will overwrite current Puzzle, Are you sure (y/n)?");
+      char ch=getch();
+      if(ch=='y')ReadFile(p1,"./save.txt");
+    }
+    else Display(p1,row,col);
   }
 
   endwin();

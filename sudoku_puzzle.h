@@ -15,7 +15,7 @@ using namespace std;
 
 class SudokuPuzzle
 {
-	private:
+	public:
 		vector<int> table;
 
 	public:
@@ -33,7 +33,7 @@ class SudokuPuzzle
 		int SearchHorizontalLine_(int line_number,int search_value);//returns how many times a search_value is found in a row
 		bool TestSquare_(int row, int column, int search_value);//returns true when square could hold search_value withought makeing the puzzle inconsistent
 		int FindBox_(int row,int column);//returns index of box that a square(0-80))is in
-
+		friend void WriteFile(const SudokuPuzzle &p1, string file);
 };
 
 SudokuPuzzle::SudokuPuzzle()

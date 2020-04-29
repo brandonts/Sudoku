@@ -4,6 +4,8 @@
 
 #include "sudoku_puzzle.h"
 #include "sudoku_logic.h"
+#include <fstream>
+#include <string>
 
 void Display(SudokuPuzzle &p1)
 {
@@ -48,6 +50,24 @@ void Display(SudokuPuzzle &p1,int row,int column)
 	}
 	 printw("\n-------------------------\n");
 	 refresh();
+}
+
+
+void WriteFile(const SudokuPuzzle &p1, string file)
+{
+	std::ofstream outFile(file);
+	for(const auto &e : p1.table) outFile <<e<<" ";
+	outFile<<endl;
+}
+
+void ReadFile(SudokuPuzzle &p1, string file)
+{
+	int value=0;
+	vector<int> v1;
+	std::ifstream inFile(file);
+	while(inFile >> value){v1.push_back(value);}
+	p1=v1;
+
 }
 
 #endif /* NCURSES_SUDOKU_SOLVER_H_ */

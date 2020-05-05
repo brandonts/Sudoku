@@ -56,7 +56,10 @@ void Display(SudokuPuzzle &p1,int row,int column)
 void WriteFile(const SudokuPuzzle &p1, string file)
 {
 	std::ofstream outFile(file);
-	for(const auto &e : p1.table) outFile <<e<<" ";
+	for(int i=0; i<9; i++)
+	{
+		for(int j=0; j<9; j++) outFile<<p1.Read_(i,j)<<" ";
+	}
 	outFile<<endl;
 }
 

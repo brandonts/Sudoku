@@ -15,7 +15,7 @@ using namespace std;
 
 class SudokuPuzzle
 {
-	public:
+private:
 		vector<int> table;
 
 	public:
@@ -26,7 +26,7 @@ class SudokuPuzzle
 		bool operator==(const vector<int> &other);
 		bool operator!=(const vector<int> &other);
 		void Write_(int row, int column, int value);//writes value to a square
-		int Read_(int row, int column);//reads value from a square
+		int Read_(int row, int column) const;//reads value from a square
 		int Check_();//returns -1 if puzzle has become inconsistent, returns the number of empty square otherwise
 		int SearchBox_(int box_number,int search_value);//returns how many times a search_value is found in a box
 		int SearchVerticalLine_(int line_number,int search_value);//returns how many times a search_value is found in a column
@@ -89,7 +89,7 @@ void SudokuPuzzle::Write_(int row, int column, int value)
 	table[square]=value;
 }
 
-int SudokuPuzzle::Read_(int row, int column)
+int SudokuPuzzle::Read_(int row, int column) const
 {
 	if(row<0 || row>8) throw invalid_argument("SudokuPuzzle::Read_: 0-8 allowed for row");
 	if(column<0 || column>8) throw invalid_argument("SudokuPuzzle::Read_: 0-8 allowed for column");

@@ -41,7 +41,7 @@ int main()
     else if(input=='q')break;
     else if(input=='c')
     {
-      printw("\nAre you sure (y/n)?");
+      printw("\nThis will delete current puzzle. Are you sure (y/n)?");
       while(true)
       {
         char ch=getch();
@@ -54,7 +54,7 @@ int main()
       SudokuPuzzle p2=SudokuSolver(p1);
       if(p1==p2)
       {
-        printw(" Your Puzzle can not be solved as is.");
+        printw("\nYour Puzzle can not be solved as is.");
         getch();
       }
       else

@@ -1,6 +1,8 @@
 #ifndef SUDOKU_LOGIC_H_
 #define SUDOKU_LOGIC_H_
 
+#include "sudoku_puzzle.h"
+
 #define DEBUG false
 
 #if DEBUG

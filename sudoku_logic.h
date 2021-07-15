@@ -411,7 +411,6 @@ int BlockLineValueElimination(SudokuPuzzle &x)
 //only finds one per call
 int Elimination(SudokuPuzzle &x)
 {
-	int change=false;
 	for(int i=0; i<9; i++)
 	{
 		for(int j=0; j<9; j++)
@@ -525,8 +524,6 @@ int Solver(SudokuPuzzle& x)
 
 SudokuPuzzle SudokuSolver(SudokuPuzzle x)
 {
-	int squares=x.Check_();
-
 	#if DEBUG
 	guess_counter=0;
 	only_counter=0;

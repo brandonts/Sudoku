@@ -75,7 +75,7 @@ int TestPuzzleValidation()
 	FormatDisplay("TestPuzzleValidation()");
 	vector<int> invalidPuzzle{1,2,3};
 	try{SudokuPuzzle p1{invalidPuzzle};cout<<"Fail\n";return 1;
-	}catch (invalid_argument e1){cout<<"Pass\n";}
+	}catch (invalid_argument& e1){cout<<"Pass\n";}
 	return 0;
 }
 
@@ -86,10 +86,10 @@ int TestWrite_()
 	int testFailures=0;
 	cout<<"\n";
 	try{p1.Write_(-1,5,2);FormatRight("Invalid Row","Fail");testFailures++;
-	}catch (invalid_argument e1){FormatRight("Invalid Row","Pass");}
+	}catch (invalid_argument& e1){FormatRight("Invalid Row","Pass");}
 
 	try{p1.Write_(5,9,2);FormatRight("Invalid Column","Fail");testFailures++;
-	}catch (invalid_argument e1){FormatRight("Invalid Column","Pass");}
+	}catch (invalid_argument& e1){FormatRight("Invalid Column","Pass");}
 
 	if(testFailures>0)return testFailures;
 	return 0;
@@ -102,10 +102,10 @@ int TestRead_()
 	int testFailures=0;
 	cout<<"\n";
 	try{p1.Read_(-1,5);FormatRight("Invalid Row","Fail");testFailures++;
-}catch (invalid_argument e1){FormatRight("Invalid Row","Pass");}
+}catch (invalid_argument& e1){FormatRight("Invalid Row","Pass");}
 
 	try{p1.Read_(6,9);FormatRight("Invalid Column","Fail");testFailures++;
-}catch (invalid_argument e1){FormatRight("Invalid Column","Pass");}
+}catch (invalid_argument& e1){FormatRight("Invalid Column","Pass");}
 
 	if(testFailures>0)return testFailures;
 	return 0;
@@ -1843,7 +1843,7 @@ int TestBlockLineElimination()
 
 	int value=0;
 	value=BlockLineElimination(p1);
-	if(value=0)
+	if(value==0)
 	{
 		FormatRight("Empty Puzzle return -1","Fail");testFailures++;p1.Display_();
 	}else FormatRight("Empty Puzzle return -1","Pass");

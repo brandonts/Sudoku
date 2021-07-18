@@ -101,12 +101,12 @@ int SudokuPuzzle::Check_()
 {
 	for(int i=0; i<9; i++)//returns -1 if any values are found twice in any box,row, or column
 	{
-		for(int j=1; j<9; j++)
+		for(int j=1; j<10; j++)
 		{
-			if(SearchBox_(i,j)>1) 			return(-1);
+			if(SearchBox_(i,j)>1)		return(-1);
 			if(SearchVerticalLine_(i,j)>1) 	return(-1);
 			if(SearchHorizontalLine_(i,j)>1)return(-1);
-			if(Read_(i,j)>9 || Read_(i,j)<0)return(-1);
+			if(j<9) if(Read_(i,j)>9 || Read_(i,j)<0)return(-1);
 		}
 	}
 	int empty_squares=0;

@@ -4,7 +4,7 @@
 #include <vector>
 #include "sudoku_puzzle.h"
 
-#define DEBUG true
+#define DEBUG false
 
 #if DEBUG
 int guess_counter=0;

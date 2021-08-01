@@ -5,7 +5,7 @@
  *      Author: Brandon Shaw
  */
 
-#include "sudoku_logic.h"
+#include "sudoku_logic_stack.h"
 #include "sudoku_puzzle.h"
 
 #include <iostream>

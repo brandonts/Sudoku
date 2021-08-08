@@ -445,7 +445,7 @@ int Solver(SudokuPuzzle& x)
 	std::vector<SudokuPuzzle> puzzleStack;
 	puzzleStack.push_back(x);
 
-	std::vector<vector<int>> guessStack;
+	std::vector<std::vector<int>> guessStack;
 	guessStack.push_back({0,0,0});
 
 	while(puzzleStack.back().Check_()!=0) //no exit until puzzle complete or unsolvable

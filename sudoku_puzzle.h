@@ -11,20 +11,18 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
-
 class SudokuPuzzle
 {
 private:
-		vector<int> table;
+	std::vector<int> table;
 
 	public:
 		void Display_();
 		SudokuPuzzle();
-		SudokuPuzzle(vector<int> v);
+		SudokuPuzzle(std::vector<int> v);
 		bool operator==(const SudokuPuzzle &other);
-		bool operator==(const vector<int> &other);
-		bool operator!=(const vector<int> &other);
+		bool operator==(const std::vector<int> &other);
+		bool operator!=(const std::vector<int> &other);
 		void Write_(int row, int column, int value);//writes value to a square
 		int Read_(int row, int column) const;//reads value from a square
 		int Check_();//returns -1 if puzzle has become inconsistent, returns the number of empty square otherwise
@@ -33,18 +31,19 @@ private:
 		int SearchHorizontalLine_(int line_number,int search_value);//returns how many times a search_value is found in a row
 		bool TestSquare_(int row, int column, int search_value);//returns true when square could hold search_value withought makeing the puzzle inconsistent
 		int FindBox_(int row,int column);//returns index of box that a square(0-80))is in
-		friend void WriteFile(const SudokuPuzzle &p1, string file);
+		std::vector<int> GetPuzzle_();
+		//friend void ncurse::WriteFile(const SudokuPuzzle &p1, string file);
 };
 
 SudokuPuzzle::SudokuPuzzle()
 {
 	for(int i=0; i<81; i++) table.push_back(0);
-	if(table.size()!=81) throw invalid_argument("SudokuPuzzle::SudokuPuzzle: vector not size 81");
+	if(table.size()!=81) throw std::invalid_argument("SudokuPuzzle::SudokuPuzzle: vector not size 81");
 }
 
-SudokuPuzzle::SudokuPuzzle(vector<int> v)
+SudokuPuzzle::SudokuPuzzle(std::vector<int> v)
 {
-	if(v.size()!=81) throw invalid_argument("SudokuPuzzle::SudokuPuzzle: vector not size 81");
+	if(v.size()!=81) throw std::invalid_argument("SudokuPuzzle::SudokuPuzzle: vector not size 81");
 	table=v;
 }
 
@@ -53,12 +52,12 @@ bool SudokuPuzzle::operator==(const SudokuPuzzle &other)
 	return(this->table==other.table);
 }
 
-bool SudokuPuzzle::operator==(const vector<int> &other)
+bool SudokuPuzzle::operator==(const std::vector<int> &other)
 {
 	return(this->table==other);
 }
 
-bool SudokuPuzzle::operator!=(const vector<int> &other)
+bool SudokuPuzzle::operator!=(const std::vector<int> &other)
 {
 	return !(this->operator==(other));
 }
@@ -67,32 +66,32 @@ void SudokuPuzzle::Display_()
 {
 	for(int i=0;i<9;i++)
 	{
-		if(i==0 || i==3 || i==6) cout<<"\n-------------------------\n";
-		else cout<<"\n";
-		cout << "| ";
+		if(i==0 || i==3 || i==6) std::cout<<"\n-------------------------\n";
+		else std::cout<<"\n";
+		std::cout << "| ";
 		for(int j=0;j<9;j++)
 		{
-			cout << this->Read_(i,j);
-			if(j==2 || j==5 || j==8) cout<<" | ";
-			else cout<<" ";
+			std::cout << this->Read_(i,j);
+			if(j==2 || j==5 || j==8) std::cout<<" | ";
+			else std::cout<<" ";
 		}
 	}
-	 cout<<"\n-------------------------\n";
+	std::cout<<"\n-------------------------\n";
 }
 
 void SudokuPuzzle::Write_(int row, int column, int value)
 {
-	if(row<0 || row>8) throw invalid_argument("SudokuPuzzle::Write_: 0-8 allowed for row");
-	if(column<0 || column>8) throw invalid_argument("SudokuPuzzle::Write_: 0-8 allowed for column");
+	if(row<0 || row>8) throw std::invalid_argument("SudokuPuzzle::Write_: 0-8 allowed for row");
+	if(column<0 || column>8) throw std::invalid_argument("SudokuPuzzle::Write_: 0-8 allowed for column");
 	int square=(row*9+column);
-	if(square>80) throw invalid_argument("SudokuPuzzle::Write_: out of bounds 0-80 required");
+	if(square>80) throw std::invalid_argument("SudokuPuzzle::Write_: out of bounds 0-80 required");
 	table[square]=value;
 }
 
 int SudokuPuzzle::Read_(int row, int column) const
 {
-	if(row<0 || row>8) throw invalid_argument("SudokuPuzzle::Read_: 0-8 allowed for row");
-	if(column<0 || column>8) throw invalid_argument("SudokuPuzzle::Read_: 0-8 allowed for column");
+	if(row<0 || row>8) throw std::invalid_argument("SudokuPuzzle::Read_: 0-8 allowed for row");
+	if(column<0 || column>8) throw std::invalid_argument("SudokuPuzzle::Read_: 0-8 allowed for column");
 	return table[row*9+column];
 }
 
@@ -129,7 +128,7 @@ int SudokuPuzzle::SearchBox_(int box_number,int search_value)
 		case 6: b=54;	break;
 		case 7: b=57;	break;
 		case 8: b=60;	break;
-		default: throw invalid_argument("SudokuPuzzle::SearchBox_: out of bounds 0-8 required");
+		default: throw std::invalid_argument("SudokuPuzzle::SearchBox_: out of bounds 0-8 required");
 	}
 
 	if(table[b]==search_value)		count++;
@@ -147,7 +146,7 @@ int SudokuPuzzle::SearchBox_(int box_number,int search_value)
 
 int SudokuPuzzle::SearchVerticalLine_(int line_number,int search_value)
 {
-	if(line_number<0 || line_number>8) throw invalid_argument("SudokuPuzzle::SearchVerticalLine: out of bounds 0-8 required");
+	if(line_number<0 || line_number>8) throw std::invalid_argument("SudokuPuzzle::SearchVerticalLine: out of bounds 0-8 required");
 	int count=0;
 	for(int i=line_number; i<81; i+=9)	if(table[i]==search_value) count++;
 
@@ -169,7 +168,7 @@ int SudokuPuzzle::SearchHorizontalLine_(int line_number,int search_value)
 		case 6: b=54;	break;
 		case 7: b=63;	break;
 		case 8: b=72;	break;
-		default: throw invalid_argument("SudokuPuzzle::SearchHorizontalLine_: out of bounds 0-8 required");
+		default: throw std::invalid_argument("SudokuPuzzle::SearchHorizontalLine_: out of bounds 0-8 required");
 	}
 	for(int i=0; i<9 ; i++) if(table[b+i]==search_value) count++;
 
@@ -178,9 +177,9 @@ int SudokuPuzzle::SearchHorizontalLine_(int line_number,int search_value)
 
 int SudokuPuzzle::FindBox_(int row, int column)
 {
-	if(0>row || row>8 || 0>column || column>8) throw invalid_argument("SudokuPuzzle::TestSquare_: out of bounds 0-8 required");
+	if(0>row || row>8 || 0>column || column>8) throw std::invalid_argument("SudokuPuzzle::TestSquare_: out of bounds 0-8 required");
 	int square=row*9+column;
-	if(square<0 || square>80) throw invalid_argument("SudokuPuzzle::FindBox_: out of bounds 0-80 required");
+	if(square<0 || square>80) throw std::invalid_argument("SudokuPuzzle::FindBox_: out of bounds 0-80 required");
 	switch(square)
 	{
 		case 0:	return 0; break;
@@ -264,7 +263,7 @@ int SudokuPuzzle::FindBox_(int row, int column)
 		case 78:return 8; break;
 		case 79:return 8; break;
 		case 80:return 8; break;
-		default:throw invalid_argument("SudokuPuzzle::FindBox_: out of bounds 0-80 required");
+		default:throw std::invalid_argument("SudokuPuzzle::FindBox_: out of bounds 0-80 required");
 	}
 	return -1;
 }
@@ -275,6 +274,11 @@ bool SudokuPuzzle::TestSquare_(int row, int column, int value)
 	return (!(this->SearchBox_(this->FindBox_(row,column),value) ||
 						this->SearchVerticalLine_(column,value) ||
 						this->SearchHorizontalLine_(row,value)));
+}
+
+std::vector<int> SudokuPuzzle::GetPuzzle_()
+{
+	return table;
 }
 
 #endif /* SUDOKU_PUZZLE_H_ */

@@ -11,11 +11,7 @@
     #include <wx/wx.h>
 #endif
 
-
 int BUTTON_SIZE = 35;
-
-SudokuPuzzle puzzle{};
-
 
 class MyApp : public wxApp
 {
@@ -54,37 +50,38 @@ SelectNumberDialog::SelectNumberDialog (wxWindow * parent, int event_id, wxPoint
 
 class MyFrame : public wxFrame
 {
-public:
-    MyFrame();
-private:
-	std::vector<wxButton *> buttons;
-	void OnExit(wxCommandEvent& event);
-	void OnAbout(wxCommandEvent& event);
-	void OnSelectSquare(wxCommandEvent& event);
-	void OnSave(wxCommandEvent& event);
-	void OnLoad(wxCommandEvent& event);
-	void OnSolve(wxCommandEvent& event);
-	void OnClear(wxCommandEvent& event);
-	void OnRefresh(wxCommandEvent& event);
-	void Refresh();
-	void WriteFile(const SudokuPuzzle &p1, string file);
-	void ReadFile(SudokuPuzzle &p1, string file);
+	public:
+		MyFrame();
+		SudokuPuzzle puzzle{};
+	private:
+		std::vector<wxButton *> buttons;
+		void OnExit(wxCommandEvent& event);
+		void OnAbout(wxCommandEvent& event);
+		void OnSelectSquare(wxCommandEvent& event);
+		void OnSave(wxCommandEvent& event);
+		void OnLoad(wxCommandEvent& event);
+		void OnSolve(wxCommandEvent& event);
+		void OnClear(wxCommandEvent& event);
+		void OnRefresh(wxCommandEvent& event);
+		void Refresh();
+		void WriteFile(const SudokuPuzzle &p1, std::string file);
+		void ReadFile(SudokuPuzzle &p1, std::string file);
 };
 
-void MyFrame::WriteFile(const SudokuPuzzle &p1, string file)
+void MyFrame::WriteFile(const SudokuPuzzle &p1, std::string file)
 {
         std::ofstream outFile(file);
         for(int i=0; i<9; i++)
         {
                 for(int j=0; j<9; j++) outFile<<p1.Read_(i,j)<<" ";
         }
-        outFile<<endl;
+        outFile<<std::endl;
 }
 
-void MyFrame::ReadFile(SudokuPuzzle &p1, string file)
+void MyFrame::ReadFile(SudokuPuzzle &p1, std::string file)
 {
         int value=0;
-        vector<int> v1; 
+	std::vector<int> v1; 
         std::ifstream inFile(file);
         while(inFile >> value){v1.push_back(value);}
         p1=v1;
@@ -96,13 +93,14 @@ void SelectNumberDialog::OnSelectNumber(wxCommandEvent& event)
 	int square = this->index;
 	int row = square/9;
 	int col = square-row*9;
-	puzzle.Write_(row,col,selection);
+	MyFrame *myParent = (MyFrame *) GetParent();
+	myParent->puzzle.Write_(row,col,selection);
 	GetParent()->GetEventHandler()->AddPendingEvent(wxCommandEvent(wxEVT_BUTTON, 200));
 	Close(true);
 }
 
 
-wxIMPLEMENT_APP(MyApp);
+//wxIMPLEMENT_APP(MyApp);
 bool MyApp::OnInit()
 {
     MyFrame *frame = new MyFrame();

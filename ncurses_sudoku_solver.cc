@@ -5,12 +5,14 @@
 #include "sudoku_puzzle.h"
 #include "sudoku_logic.h"
 
+namespace ncurse
+{
 void Display(SudokuPuzzle &p1);
 void Display(SudokuPuzzle &p1,int row,int column);
-void WriteFile(const SudokuPuzzle &p1, string file);
-void ReadFile(SudokuPuzzle &p1, string file);
+void WriteFile(const SudokuPuzzle &p1, std::string file);
+void ReadFile(SudokuPuzzle &p1, std::string file);
 
-int main()
+int ncurses_interface()
 {
   initscr();
   cbreak();
@@ -136,22 +138,23 @@ void Display(SudokuPuzzle &p1,int row,int column)
          refresh();
 }
 
-void WriteFile(const SudokuPuzzle &p1, string file)
+void WriteFile(const SudokuPuzzle &p1, std::string file)
 {
         std::ofstream outFile(file);
         for(int i=0; i<9; i++)
         {
                 for(int j=0; j<9; j++) outFile<<p1.Read_(i,j)<<" ";
         }
-        outFile<<endl;
+        outFile<<std::endl;
 }
 
-void ReadFile(SudokuPuzzle &p1, string file)
+void ReadFile(SudokuPuzzle &p1, std::string file)
 {
         int value=0;
-        vector<int> v1; 
+	std::vector<int> v1; 
         std::ifstream inFile(file);
         while(inFile >> value){v1.push_back(value);}
         p1=v1;
 
+}
 }

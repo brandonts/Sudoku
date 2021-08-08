@@ -1,2 +1,1 @@
-ncurses: -lncurses
-wxWidgets: 'wx-config --libs --cxxflags'
+g++ sudoku_solver_main.cpp -lncurses `wx-config --libs --cxxflags` -Wall

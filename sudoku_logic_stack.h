@@ -2,7 +2,7 @@
 #define SUDOKU_LOGIC_H_
 
 #include <vector>
-#include "sudoku_puzzle.h"
+#include "Sudoku_Puzzle/sudoku_puzzle.h"
 
 #define DEBUG false
 

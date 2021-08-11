@@ -6,7 +6,7 @@
  */
 
 #include "sudoku_logic_stack.h"
-#include "sudoku_puzzle.h"
+#include "Sudoku_Puzzle/sudoku_puzzle.h"
 
 #include <iostream>
 

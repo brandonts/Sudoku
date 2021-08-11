@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 
-#include "sudoku_puzzle.h"
+#include "Sudoku_Puzzle/sudoku_puzzle.h"
 #include "sudoku_logic.h"
 
 namespace ncurse

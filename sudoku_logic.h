@@ -1,7 +1,7 @@
 #ifndef SUDOKU_LOGIC_H_
 #define SUDOKU_LOGIC_H_
 
-#include "sudoku_puzzle.h"
+#include "Sudoku_Puzzle/sudoku_puzzle.h"
 
 #define DEBUG false
 

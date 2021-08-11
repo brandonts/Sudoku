@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 
+#include "sudoku_puzzle.h"
+
 SudokuPuzzle::SudokuPuzzle()
 {
 	for(int i=0; i<81; i++) table.push_back(0);

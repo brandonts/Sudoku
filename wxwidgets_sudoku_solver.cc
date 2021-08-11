@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 
-#include "sudoku_puzzle.h"
+#include "Sudoku_Puzzle/sudoku_puzzle.h"
 #include "sudoku_logic_stack.h"
 
 #ifndef WX_PRECOMP

@@ -2,7 +2,16 @@
 #include <fstream>
 #include <iostream>
 
-#include "wxwidgets_sudoku_solver.cc"
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
+
+class MyApp : public wxApp
+{
+public:
+    virtual bool OnInit();
+};
+
 namespace basic{int basic_interface();}
 namespace ncurse{int ncurses_interface();}
 

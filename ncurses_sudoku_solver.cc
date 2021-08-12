@@ -3,7 +3,7 @@
 #include <string>
 
 #include "Sudoku_Puzzle/sudoku_puzzle.h"
-#include "sudoku_logic.h"
+#include "sudoku_logic_stack.h"
 
 namespace ncurse
 {

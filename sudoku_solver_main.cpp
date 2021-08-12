@@ -1,9 +1,10 @@
 #include <wx/wxprec.h>
 #include <fstream>
+#include <iostream>
 
 #include "wxwidgets_sudoku_solver.cc"
-#include "ncurses_sudoku_solver.cc"
-#include "sudoku_solver.cc"
+namespace basic{int basic_interface();}
+namespace ncurse{int ncurses_interface();}
 
 int main(int argc, char *argv[])
 {
